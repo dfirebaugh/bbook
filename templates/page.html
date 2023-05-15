@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/tailwind.css" rel="stylesheet">
+    <link href="/css/catppuccin.css" rel="stylesheet">
+    <link href="/css/prose.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+
+    <title>{{.Title}}</title>
+
+    <script>
+        function reloadPage() {
+            location.reload();
+        }
+
+        function hamburgerClick() {
+            console.log("hamburger")
+            const sideNav = document.getElementById("sidenav")
+            const contentContainer = document.getElementById("content-container")
+            if (sideNav.style.display === "none") {
+                sideNav.style.display = "block"
+                contentContainer.style.width = ""
+                contentContainer.style.justifyContent = "space-around"
+            } else {
+                sideNav.style.display = "none"
+                contentContainer.style.width = "100vw"
+                contentContainer.style.justifyContent = "center"
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+</head>
+
+<body class="{{.Theme}} ">
+
+    <aside id="sidenav" class="w-full sm:w-1/3 md:w-1/4 px-2">
+        <div class="sticky top-0 pr-6 w-full">
+            <!-- navigation -->
+            <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden">
+                {{.NavLinks}}
+            </ol>
+        </div>
+    </aside>
+
+    <div class="container ">
+        <div id="content-container" class="flex flex-row flex-wrap py-4">
+            <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
+                <top-bar class="mt-auto flex justify-between">
+                    <left-buttons>
+                        <button id="sidebar-toggle" onclick="hamburgerClick()" class="icon-button" type="button" title="Toggle Table of Contents"
+                            aria-label="Toggle Table of Contents" aria-controls="sidebar" aria-expanded="true">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </left-buttons>
+
+                    <h1 class="menu-title  md-6"><a href="/">{{.SiteTitle}}</a></h1>
+
+                    <right-buttons>
+
+                    </right-buttons>
+                </top-bar>
+
+
+                <!-- content area -->
+                {{.Body}}
+
+                <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="{{.PreviousPage}}" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter"
+                        aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="{{.NextPage}}" class="nav-chapters next" title="Next chapter" aria-label="Next chapter"
+                        aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </nav>
+
+            </main>
+        </div>
+    </div>
+
+    <footer class="mt-auto">
+        <!-- ... -->
+    </footer>
+
+</body>
+
+</html>
