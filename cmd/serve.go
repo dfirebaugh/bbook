@@ -66,6 +66,8 @@ func serveSite() {
 		log.Fatal(err)
 	}
 
+	logrus.Println("serving on http://localhost:5555")
+
 	go func() {
 		for {
 			select {

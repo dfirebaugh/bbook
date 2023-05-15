@@ -1,5 +1,5 @@
 
-.catppuccin-simple body {
+.catppuccin-simple {
     background-color: rgba(var(--ctp-crust));
 }
 
@@ -12,6 +12,10 @@
 }
 
 .catppuccin-simple p {
+    color: rgba(var(--ctp-text), .6);
+}
+
+.catppuccin-simple li {
     color: rgba(var(--ctp-text), .6);
 }
 
@@ -31,6 +35,15 @@
 .catppuccin-simple pre {
     background-color: rgba(var(--ctp-overlay2),.1);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow);
+}
+
+
+.catppuccin-simple p code {
+    background-color: rgba(var(--ctp-overlay2),.1);
+}
+.catppuccin-simple code {
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow);
+    color: rgba(var(--ctp-mauve), .5);
 }
 
 .catppuccin-simple table {

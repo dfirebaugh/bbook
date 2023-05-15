@@ -1,0 +1,9 @@
+
+[book]
+authors = ["Dustin Firebaugh"]
+src = "src"
+title = "docbook"
+
+[output.html]
+default-theme = "simple"
+site-url = "dfirebaugh.github.io/docbook"
