@@ -51,7 +51,8 @@ func init() {
 func serveSite() {
 	buildSite()
 
-	http.Handle("/", http.FileServer(http.Dir(".book")))
+	http.Handle(conf.Output["html"].SiteURL, http.StripPrefix(conf.Output["html"].SiteURL, http.FileServer(http.Dir(".book"))))
+
 	http.HandleFunc("/reload", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "<html><body><script>reloadPage();</script></body></html>")
 	})
@@ -66,7 +67,7 @@ func serveSite() {
 		log.Fatal(err)
 	}
 
-	logrus.Println("serving on http://localhost:5555")
+	logrus.Println("serving on http://localhost:5555" + conf.Output["html"].SiteURL)
 
 	go func() {
 		for {

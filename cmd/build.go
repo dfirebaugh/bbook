@@ -199,6 +199,7 @@ func buildPage(page parser.Page, tmpl *template.Template, nextPage string, previ
 
 	err = tmpl.Execute(f, struct {
 		SiteTitle    string
+		SiteURL      string
 		Title        string
 		NextPage     string
 		PreviousPage string
@@ -207,9 +208,10 @@ func buildPage(page parser.Page, tmpl *template.Template, nextPage string, previ
 		NavLinks     template.HTML
 	}{
 		SiteTitle:    conf.Book.Title,
+		SiteURL:      conf.Output["html"].SiteURL,
 		Title:        page.Title,
-		NextPage:     mdLinkToHTMLLink(nextPage),
-		PreviousPage: mdLinkToHTMLLink(previousPage),
+		NextPage:     addSiteURL(mdLinkToHTMLLink(nextPage)),
+		PreviousPage: addSiteURL(mdLinkToHTMLLink(previousPage)),
 		Body:         template.HTML(getBodyChildren([]byte(content))),
 		NavLinks:     template.HTML(getBodyChildren([]byte(navbar))),
 		Theme:        conf.Output["html"].DefaultTheme,
@@ -302,6 +304,10 @@ func mdLinkToHTMLLink(l string) string {
 	return result
 }
 
+func addSiteURL(l string) string {
+	return strings.Join([]string{conf.Output["html"].SiteURL, l}, "")
+}
+
 func replaceMDWithHTMLInLinks(h string) (string, error) {
 	doc, err := gohtml.Parse(strings.NewReader(h))
 	if err != nil {
@@ -313,7 +319,7 @@ func replaceMDWithHTMLInLinks(h string) (string, error) {
 		if n.Type == gohtml.ElementNode && n.Data == "a" {
 			for i := range n.Attr {
 				if n.Attr[i].Key == "href" {
-					n.Attr[i].Val = mdLinkToHTMLLink(n.Attr[i].Val)
+					n.Attr[i].Val = addSiteURL(mdLinkToHTMLLink(n.Attr[i].Val))
 				}
 			}
 		}

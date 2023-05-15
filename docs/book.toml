@@ -6,4 +6,4 @@ title = "docbook"
 
 [output.html]
 default-theme = "simple"
-site-url = "dfirebaugh.github.io/docbook"
+site-url = "/docbook/"
