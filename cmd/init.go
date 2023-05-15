@@ -67,6 +67,7 @@ func writeConfig(bookName string) {
 	output := make(map[string]config.Theme)
 	output["html"] = config.Theme{
 		DefaultTheme: "simple",
+		SiteURL:      "/book/",
 	}
 
 	config.WriteConfig(&config.Config{
