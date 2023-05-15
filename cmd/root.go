@@ -28,8 +28,8 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "docbook",
-	Short: "docbook is a simple and blazingly-fast static site generator for writing documentation.",
+	Use:   "bfbook",
+	Short: "bfbook is a simple and blazingly-fast static site generator for writing documentation.",
 	Long:  ``,
 }
 

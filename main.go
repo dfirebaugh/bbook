@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 package main
 
-import "github.com/dfirebaugh/docbook/cmd"
+import "github.com/dfirebaugh/bfbook/cmd"
 
 func main() {
 	cmd.Execute()

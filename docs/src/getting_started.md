@@ -6,12 +6,12 @@
 ### install with go
 
 ```bash
-go install github.com/dfirebaugh/docbook@latest
+go install github.com/dfirebaugh/bfbook@latest
 ```
 > Installing with go should work cross platform
 
 ### Download a release
-[https://github.com/dfirebaugh/docbook/releases/latest](https://github.com/dfirebaugh/docbook/releases/latest)
+[https://github.com/dfirebaugh/bfbook/releases/latest](https://github.com/dfirebaugh/bfbook/releases/latest)
 
 ### Building from source
 
@@ -20,8 +20,8 @@ go install github.com/dfirebaugh/docbook@latest
 3. run `go build`
 
 ```bash
-git clone github.com/dfirebaugh/docbook
-cd docbook
+git clone github.com/dfirebaugh/bfbook
+cd bfbook
 go build
 ```
 
@@ -31,12 +31,12 @@ Navigate to a directory where you would like to create your markdown files.
 
 Run the following command
 
-`docbook init <book name>`
+`bfbook init <book name>`
 
 e.g.
 
 ```bash
-docbook init docbook
+bfbook init bfbook
 ```
 
 This will create a `book.toml` file that will act as your config.
@@ -45,10 +45,10 @@ It will also create a `SUMMARY.md` file.  This is a special markdown file that w
 ### Serve the static site locally
 
 ```bash
-docbook serve
+bfbook serve
 ```
 
-`docbook serve` will serve the `.book` dir by default.  It will also create any markdown files that are linked in the `SUMMARY.md` file (if they don't exist).
+`bfbook serve` will serve the `.book` dir by default.  It will also create any markdown files that are linked in the `SUMMARY.md` file (if they don't exist).
 
 > Any file changes will be automatically be rebuilt (however, auto page reload isn't working yet).
 

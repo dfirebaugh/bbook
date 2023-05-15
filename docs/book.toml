@@ -2,8 +2,8 @@
 [book]
 authors = ["Dustin Firebaugh"]
 src = "src"
-title = "docbook"
+title = "bfbook"
 
 [output.html]
 default-theme = "simple"
-site-url = "/docbook/"
+site-url = "/bfbook/"

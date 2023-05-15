@@ -33,8 +33,8 @@ import (
 
 	"path/filepath"
 
-	"github.com/dfirebaugh/docbook/templates"
-	"github.com/dfirebaugh/docbook/web"
+	"github.com/dfirebaugh/bfbook/templates"
+	"github.com/dfirebaugh/bfbook/web"
 
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
@@ -42,8 +42,8 @@ import (
 	"github.com/sirupsen/logrus"
 	gohtml "golang.org/x/net/html"
 
-	"github.com/dfirebaugh/docbook/pkg/config"
-	"github.com/dfirebaugh/docbook/pkg/parser"
+	"github.com/dfirebaugh/bfbook/pkg/config"
+	"github.com/dfirebaugh/bfbook/pkg/parser"
 
 	"html/template"
 	"log"

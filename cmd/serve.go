@@ -29,7 +29,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/dfirebaugh/docbook/pkg/parser"
+	"github.com/dfirebaugh/bfbook/pkg/parser"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/cobra"
 )

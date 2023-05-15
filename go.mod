@@ -1,4 +1,4 @@
-module github.com/dfirebaugh/docbook
+module github.com/dfirebaugh/bfbook
 
 go 1.20
 
