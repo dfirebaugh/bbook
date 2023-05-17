@@ -8,7 +8,7 @@ Here is a simple bash script that can deploy to gh-pages.
 ```bash
 #!/bin/bash
 
-bfbook build
+bbook build
 
 GIT_REPO_URL=$(git config --get remote.origin.url)
 

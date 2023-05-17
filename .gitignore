@@ -1,1 +1,4 @@
 .dist
+
+web/static/css/vendor/
+web/static/js/vendor/

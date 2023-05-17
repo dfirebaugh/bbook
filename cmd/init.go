@@ -25,7 +25,7 @@ import (
 	"errors"
 	"os"
 
-	"github.com/dfirebaugh/bfbook/pkg/config"
+	"github.com/dfirebaugh/bbook/pkg/config"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )

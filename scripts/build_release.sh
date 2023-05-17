@@ -4,16 +4,16 @@ mkdir -p .dist/x86_64_unknown-linux/
 mkdir -p .dist/x86_64_pc-windows/
 mkdir -p .dist/x86_64_apple-darwin/
 
-go build -o .dist/x86_64_unknown-linux/bfbook
-GOOS=windows GOARCH=amd64 go build -o .dist/x86_64_pc-windows/bfbook.exe
-GOOS=darwin GOARCH=amd64 go build -o .dist/x86_64_apple-darwin/bfbook
+go build -o .dist/x86_64_unknown-linux/bbook
+GOOS=windows GOARCH=amd64 go build -o .dist/x86_64_pc-windows/bbook.exe
+GOOS=darwin GOARCH=amd64 go build -o .dist/x86_64_apple-darwin/bbook
 
 cd .dist/x86_64_unknown-linux/
-tar -czvf bfbook-x86_64_unknown-linux.tar.gz bfbook
+tar -czvf bbook-x86_64_unknown-linux.tar.gz bbook
 cd ../x86_64_pc-windows
-tar -czvf bfbook-x86_64_pc-windows.tar.gz bfbook.exe
+tar -czvf bbook-x86_64_pc-windows.tar.gz bbook.exe
 cd ../x86_64_apple-darwin
-tar -czvf bfbook-x86_64_apple-darwin.tar.gz bfbook
+tar -czvf bbook-x86_64_apple-darwin.tar.gz bbook
 
 cd ../..
 

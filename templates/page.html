@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="{{.SiteURL}}/css/tailwind.css" rel="stylesheet">
     <link href="{{.SiteURL}}/css/catppuccin.css" rel="stylesheet">
     <link href="{{.SiteURL}}/css/prose.css" rel="stylesheet">
     <link href="{{.SiteURL}}/css/main.css" rel="stylesheet">
     <link href="{{.SiteURL}}/css/theme.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{{.SiteURL}}/favicon.png"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
 
     <title>{{.Title}}</title>
 
@@ -32,11 +37,12 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" type="image/png" href="{{.SiteURL}}/favicon.png"/>
 </head>
 
 <body class="{{.Theme}} ">
+    <script type="module" src="{{.SiteURL}}/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
     <aside id="sidenav" class="w-full sm:w-1/3 md:w-1/4 px-2">
         <div class="sticky top-0 pr-6 w-full">
@@ -58,7 +64,7 @@
                         </button>
                     </left-buttons>
 
-                    <h1 class="menu-title  md-6"><a href="{{.SiteURL}}">{{.SiteTitle}}</a></h1>
+                    <h1 class="menu-title  md-6"><a href="{{.SiteURL}}">{{.BookTitle}}</a></h1>
 
                     <right-buttons>
 
@@ -66,7 +72,6 @@
                 </top-bar>
 
 
-                <!-- content area -->
                 {{.Body}}
 
                 <nav class="nav-wide-wrapper" aria-label="Page navigation">
@@ -85,7 +90,6 @@
     </div>
 
     <footer class="mt-auto">
-        <!-- ... -->
     </footer>
 
 </body>

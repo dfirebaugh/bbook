@@ -33,8 +33,8 @@ import (
 
 	"path/filepath"
 
-	"github.com/dfirebaugh/bfbook/templates"
-	"github.com/dfirebaugh/bfbook/web"
+	"github.com/dfirebaugh/bbook/templates"
+	"github.com/dfirebaugh/bbook/web"
 
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
@@ -42,8 +42,8 @@ import (
 	"github.com/sirupsen/logrus"
 	gohtml "golang.org/x/net/html"
 
-	"github.com/dfirebaugh/bfbook/pkg/config"
-	"github.com/dfirebaugh/bfbook/pkg/parser"
+	"github.com/dfirebaugh/bbook/pkg/config"
+	"github.com/dfirebaugh/bbook/pkg/parser"
 
 	"html/template"
 	"log"
@@ -198,7 +198,7 @@ func buildPage(page parser.Page, tmpl *template.Template, nextPage string, previ
 	}
 
 	err = tmpl.Execute(f, struct {
-		SiteTitle    string
+		BookTitle    string
 		SiteURL      string
 		Title        string
 		NextPage     string
@@ -207,7 +207,7 @@ func buildPage(page parser.Page, tmpl *template.Template, nextPage string, previ
 		Body         template.HTML
 		NavLinks     template.HTML
 	}{
-		SiteTitle:    conf.Book.Title,
+		BookTitle:    conf.Book.Title,
 		SiteURL:      conf.Output["html"].SiteURL,
 		Title:        page.Title,
 		NextPage:     addSiteURL(mdLinkToHTMLLink(nextPage)),
