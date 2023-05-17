@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/bbook//css/tailwind.css" rel="stylesheet">
+    <link href="/bbook//css/catppuccin.css" rel="stylesheet">
+    <link href="/bbook//css/prose.css" rel="stylesheet">
+    <link href="/bbook//css/main.css" rel="stylesheet">
+    <link href="/bbook//css/theme.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="/bbook//favicon.png"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+
+    <title>Getting Started</title>
+
+    <script>
+        function reloadPage() {
+            location.reload();
+        }
+
+        function hamburgerClick() {
+            console.log("hamburger")
+            const sideNav = document.getElementById("sidenav")
+            const contentContainer = document.getElementById("content-container")
+            if (sideNav.style.display === "none") {
+                sideNav.style.display = "block"
+                contentContainer.style.width = ""
+                contentContainer.style.justifyContent = "space-around"
+            } else {
+                sideNav.style.display = "none"
+                contentContainer.style.width = "100vw"
+                contentContainer.style.justifyContent = "center"
+            }
+        }
+    </script>
+</head>
+
+<body class="simple ">
+    <script type="module" src="/bbook//js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+    <aside id="sidenav" class="w-full sm:w-1/3 md:w-1/4 px-2">
+        <div class="sticky top-0 pr-6 w-full">
+            
+            <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden">
+                <h4 id="getting-started">Getting Started</h4>
+
+<ul>
+<li><a href="/bbook//intro.html">Intro</a></li>
+<li><a href="/bbook//getting_started.html">Getting Started</a></li>
+<li><a href="/bbook//deploy.html">Deploy</a></li>
+<li><a href="/bbook//syntax_highlighting.html">Syntax Highlighting</a></li>
+<li><a href="/bbook//themes.html">Themes</a></li>
+</ul>
+
+<h4 id="planning">Planning</h4>
+
+<ul>
+<li><a href="/bbook//todos.html">ToDos</a></li>
+</ul>
+
+            </ol>
+        </div>
+    </aside>
+
+    <div class="container ">
+        <div id="content-container" class="flex flex-row flex-wrap py-4">
+            <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
+                <top-bar class="mt-auto flex justify-between">
+                    <left-buttons>
+                        <button id="sidebar-toggle" onclick="hamburgerClick()" class="icon-button" type="button" title="Toggle Table of Contents"
+                            aria-label="Toggle Table of Contents" aria-controls="sidebar" aria-expanded="true">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </left-buttons>
+
+                    <h1 class="menu-title  md-6"><a href="/bbook/">banana book</a></h1>
+
+                    <right-buttons>
+
+                    </right-buttons>
+                </top-bar>
+
+
+                <h1 id="getting-started">Getting Started</h1>
+
+<h2 id="installation">Installation</h2>
+
+<h3 id="install-with-go">install with go</h3>
+
+<pre><code class="language-bash">go install github.com/dfirebaugh/bbook@latest
+</code></pre>
+
+<blockquote>
+<p>Installing with go should work cross platform</p>
+</blockquote>
+
+<h3 id="download-a-release">Download a release</h3>
+
+<p><a href="/bbook/https://github.com/dfirebaugh/bbook/releases/latest" target="_blank">https://github.com/dfirebaugh/bbook/releases/latest</a></p>
+
+<h3 id="building-from-source">Building from source</h3>
+
+<ol>
+<li>Pull down the git repository.</li>
+<li>cd into the directory</li>
+<li>run <code>go build</code></li>
+</ol>
+
+<pre><code class="language-bash">git clone github.com/dfirebaugh/bbook
+cd bbook
+go build
+</code></pre>
+
+<h2 id="make-a-book">Make a book</h2>
+
+<p>Navigate to a directory where you would like to create your markdown files.</p>
+
+<p>Run the following command</p>
+
+<p><code>bbook init &lt;book name&gt;</code></p>
+
+<p>e.g.</p>
+
+<pre><code class="language-bash">bbook init bbook
+</code></pre>
+
+<p>This will create a <code>book.toml</code> file that will act as your config.
+It will also create a <code>SUMMARY.md</code> file.  This is a special markdown file that will be parsed in as the navigation sidebar.</p>
+
+<h3 id="serve-the-static-site-locally">Serve the static site locally</h3>
+
+<pre><code class="language-bash">bbook serve
+</code></pre>
+
+<p><code>bbook serve</code> will serve the <code>.book</code> dir by default.  It will also create any markdown files that are linked in the <code>SUMMARY.md</code> file (if they don’t exist).</p>
+
+<blockquote>
+<p>Any file changes will be automatically be rebuilt (however, auto page reload isn’t working yet).</p>
+</blockquote>
+
+
+                <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="/bbook//intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter"
+                        aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="/bbook//deploy.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter"
+                        aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </nav>
+
+            </main>
+        </div>
+    </div>
+
+    <footer class="mt-auto">
+    </footer>
+
+</body>
+
+</html>
