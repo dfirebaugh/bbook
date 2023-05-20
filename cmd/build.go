@@ -319,7 +319,12 @@ func replaceMDWithHTMLInLinks(h string) (string, error) {
 		if n.Type == gohtml.ElementNode && n.Data == "a" {
 			for i := range n.Attr {
 				if n.Attr[i].Key == "href" {
-					n.Attr[i].Val = addSiteURL(mdLinkToHTMLLink(n.Attr[i].Val))
+					link := n.Attr[i].Val
+					if link[0] == '/' || link[0] == '.' {
+						n.Attr[i].Val = addSiteURL(mdLinkToHTMLLink(n.Attr[i].Val))
+						continue
+					}
+					n.Attr[i].Val = mdLinkToHTMLLink(n.Attr[i].Val)
 				}
 			}
 		}
