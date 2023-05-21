@@ -52,6 +52,7 @@ func ToHTML(source []byte) []byte {
 		goldmark.WithRendererOptions(
 			rhtml.WithHardWraps(),
 			rhtml.WithXHTML(),
+			rhtml.WithUnsafe(),
 		),
 	)
 
