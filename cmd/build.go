@@ -23,7 +23,6 @@ package cmd
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -75,6 +74,7 @@ func generateMDFiles() {
 		writeFile(filepath.Join(conf.Book.Src, l.FilePath), []byte(fmt.Sprintf("\n# %s\n", l.Header)))
 	}
 }
+
 func buildSite() {
 	logrus.Println("building files to the `.book` dir")
 	generateMDFiles()
@@ -207,14 +207,20 @@ func buildPage(page parser.Page, tmpl *template.Template, nextPage string, previ
 
 // writeFile will write file if the file doesn't exist
 func writeFile(filePath string, content []byte) {
-	if _, err := os.Stat(filePath); errors.Is(err, os.ErrNotExist) {
-		f, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE, 0644)
-		if err != nil {
-			logrus.Error(err)
-		}
-		defer f.Close()
-		f.Write(content)
+	err := os.MkdirAll(filepath.Dir(filePath), 0755)
+	if err != nil {
+		logrus.Error(err)
+		return
 	}
+
+	f, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE, 0644)
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
+	defer f.Close()
+
+	f.Write(content)
 }
 
 func copyFile(src, dst string) error {
