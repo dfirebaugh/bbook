@@ -20,8 +20,9 @@ jobs:
 
     - name: Run bbook
       run: |
+        make
         cd docs
-        go run ../main.go build
+        ../.dist/x86_64_unknown-linux/bbook build
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3

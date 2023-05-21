@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./scripts/download_static_web_assets.sh
+
 mkdir -p .dist/x86_64_unknown-linux/
 mkdir -p .dist/x86_64_pc-windows/
 mkdir -p .dist/x86_64_apple-darwin/
