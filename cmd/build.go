@@ -36,13 +36,11 @@ import (
 	"github.com/dfirebaugh/bbook/templates"
 	"github.com/dfirebaugh/bbook/web"
 
-	"github.com/gomarkdown/markdown"
-	"github.com/gomarkdown/markdown/html"
-	mdparser "github.com/gomarkdown/markdown/parser"
 	"github.com/sirupsen/logrus"
 	gohtml "golang.org/x/net/html"
 
 	"github.com/dfirebaugh/bbook/pkg/config"
+	"github.com/dfirebaugh/bbook/pkg/md"
 	"github.com/dfirebaugh/bbook/pkg/parser"
 
 	"html/template"
@@ -70,20 +68,6 @@ func init() {
 	if err != nil {
 		logrus.Error(err)
 	}
-}
-
-func mdToHTML(md []byte) []byte {
-	// create markdown parser with extensions
-	extensions := mdparser.CommonExtensions | mdparser.AutoHeadingIDs | mdparser.NoEmptyLineBeforeBlock | mdparser.LaxHTMLBlocks
-	p := mdparser.NewWithExtensions(extensions)
-	doc := p.Parse(md)
-
-	// create HTML renderer with extensions
-	htmlFlags := html.CommonFlags | html.HrefTargetBlank
-	opts := html.RendererOptions{Flags: htmlFlags}
-	renderer := html.NewRenderer(opts)
-
-	return markdown.Render(doc, renderer)
 }
 
 func generateMDFiles() {
@@ -187,12 +171,12 @@ func buildPage(page parser.Page, tmpl *template.Template, nextPage string, previ
 	if err != nil {
 		logrus.Error(err)
 	}
-	pageBytes := mdToHTML([]byte(contentBytes))
+	pageBytes := md.ToHTML([]byte(contentBytes))
 	content, err := replaceMDWithHTMLInLinks(string(getBodyChildren(pageBytes)))
 	if err != nil {
 		logrus.Error(err)
 	}
-	navbar, err := replaceMDWithHTMLInLinks(string(mdToHTML(buildNavLinks())))
+	navbar, err := replaceMDWithHTMLInLinks(string(buildNavLinks()))
 	if err != nil {
 		logrus.Error(err)
 	}
@@ -295,7 +279,7 @@ func readNavLinks() []byte {
 }
 
 func buildNavLinks() []byte {
-	return mdToHTML(readNavLinks())
+	return md.ToHTML(readNavLinks())
 }
 
 func mdLinkToHTMLLink(l string) string {

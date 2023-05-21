@@ -38,3 +38,7 @@ top-bar {
         display: none;
     }
 }
+
+.mermaid {
+    background: whitesmoke !important;
+}
