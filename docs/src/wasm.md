@@ -10,7 +10,9 @@
 </go-wasm-canvas>
 ```
 
+<center>
 <go-wasm-canvas 
     src="wasm_example/spectrum.wasm" 
     height=400 width=530>
 </go-wasm-canvas>
+</center>
