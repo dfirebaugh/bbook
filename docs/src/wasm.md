@@ -1,7 +1,7 @@
 
 # WASM Embedding
 
-> note: currently only golang wasm files are supported.  However, you may be able to get this to work if you provide the necessary glue code
+> note: currently only golang wasm files are supported.  However, if you are compiling to wasm from another language, you may be able to get this to work if you provide the necessary glue code
 
 ```markdown
 <go-wasm-canvas 
