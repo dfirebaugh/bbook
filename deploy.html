@@ -17,31 +17,26 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Deploy</title>
+</head>
 
+<body class="simple ">
+    <script type="module" src="/bbook//js/index.js"></script>
     <script>
         function reloadPage() {
             location.reload();
         }
 
         function hamburgerClick() {
-            console.log("hamburger")
             const sideNav = document.getElementById("sidenav")
             const contentContainer = document.getElementById("content-container")
-            if (sideNav.style.display === "none") {
+            console.log(sideNav.style.display)
+            if (sideNav.style.display !== "block") {
                 sideNav.style.display = "block"
-                contentContainer.style.width = ""
-                contentContainer.style.justifyContent = "space-around"
-            } else {
+            } else if (sideNav.style.display === "block") {
                 sideNav.style.display = "none"
-                contentContainer.style.width = "100vw"
-                contentContainer.style.justifyContent = "center"
             }
         }
     </script>
-</head>
-
-<body class="simple ">
-    <script type="module" src="/bbook//js/index.js"></script>
     <aside id="sidenav" class="w-full sm:w-1/3 md:w-1/4 px-2">
         <div class="sticky top-0 pr-6 w-full">
             <button id="sidebar-close-sidebar" onclick="hamburgerClick()" class="icon-button" type="button"
