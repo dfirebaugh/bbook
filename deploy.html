@@ -10,10 +10,11 @@
     <link href="/bbook//css/prose.css" rel="stylesheet">
     <link href="/bbook//css/main.css" rel="stylesheet">
     <link href="/bbook//css/theme.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="/bbook//favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="/bbook//favicon.png" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Deploy</title>
 
@@ -41,25 +42,19 @@
 
 <body class="simple ">
     <script type="module" src="/bbook//js/index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-
     <aside id="sidenav" class="w-full sm:w-1/3 md:w-1/4 px-2">
         <div class="sticky top-0 pr-6 w-full">
-            
             <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden">
                 <h4 id="getting-started">Getting Started</h4>
-
 <ul>
 <li><a href="/bbook//intro.html">Intro</a></li>
 <li><a href="/bbook//getting_started.html">Getting Started</a></li>
-<li><a href="/bbook//deploy.html">Deploy</a></li>
 <li><a href="/bbook//syntax_highlighting.html">Syntax Highlighting</a></li>
+<li><a href="/bbook//diagrams.html">Diagrams</a></li>
+<li><a href="/bbook//deploy.html">Deploy</a></li>
 <li><a href="/bbook//themes.html">Themes</a></li>
 </ul>
-
 <h4 id="planning">Planning</h4>
-
 <ul>
 <li><a href="/bbook//todos.html">ToDos</a></li>
 </ul>
@@ -73,8 +68,9 @@
             <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
                 <top-bar class="mt-auto flex justify-between">
                     <left-buttons>
-                        <button id="sidebar-toggle" onclick="hamburgerClick()" class="icon-button" type="button" title="Toggle Table of Contents"
-                            aria-label="Toggle Table of Contents" aria-controls="sidebar" aria-expanded="true">
+                        <button id="sidebar-toggle" onclick="hamburgerClick()" class="icon-button" type="button"
+                            title="Toggle Table of Contents" aria-label="Toggle Table of Contents"
+                            aria-controls="sidebar" aria-expanded="true">
                             <i class="fa fa-bars"></i>
                         </button>
                     </left-buttons>
@@ -88,33 +84,30 @@
 
 
                 <h1 id="deploy">Deploy</h1>
-
 <p>Here is a simple bash script that can deploy to gh-pages.</p>
-
-<pre><code class="language-bash">#!/bin/bash
-
-bbook build
-
-GIT_REPO_URL=$(git config --get remote.origin.url)
-
-cd .book
-git init .
-git remote add github $GIT_REPO_URL
-git checkout -b gh-pages
-git add .
-git commit -am &#34;Static site deploy&#34;
-git push github gh-pages --force
-cd ..
-</code></pre>
-
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>bbook build
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>GIT_REPO_URL<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git config --get remote.origin.url<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>cd .book
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>git init .
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>git remote add github $GIT_REPO_URL
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>git checkout -b gh-pages
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>git add .
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>git commit -am <span style="color:#e6db74">&#34;Static site deploy&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>git push github gh-pages --force
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>cd ..
+</span></span></code></pre>
 
                 <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="/bbook//getting_started.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter"
-                        aria-keyshortcuts="Left">
+                    <a rel="prev" href="/bbook//diagrams.html" class="nav-chapters previous" title="Previous chapter"
+                        aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="/bbook//syntax_highlighting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter"
-                        aria-keyshortcuts="Right">
+                    <a rel="next" href="/bbook//themes.html" class="nav-chapters next" title="Next chapter"
+                        aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </nav>
