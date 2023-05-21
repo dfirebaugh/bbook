@@ -12,6 +12,7 @@ body {
     left: 0;
     height: 100vh;
     width: 20vw;
+    background: whitesmoke !important;
 }
 
 .navbar * {
@@ -33,8 +34,25 @@ top-bar {
     width: 100vw;
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 960px) {
     #sidenav {
+        width: 100vw;
+        display: none;
+    }
+
+    #sidebar-close-sidebar {
+        display: block;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
+@media (min-width: 960px) {
+    #sidenav {
+        display: block;
+    }
+
+    #sidebar-close-sidebar {
         display: none;
     }
 }
