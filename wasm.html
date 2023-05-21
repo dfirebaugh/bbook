@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/bbook//css/tailwind.css" rel="stylesheet">
+    <link href="/bbook//css/catppuccin.css" rel="stylesheet">
+    <link href="/bbook//css/prose.css" rel="stylesheet">
+    <link href="/bbook//css/main.css" rel="stylesheet">
+    <link href="/bbook//css/theme.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="/bbook//favicon.png" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>WASM Embedding</title>
+</head>
+
+<body class="simple ">
+    <script type="module" src="/bbook//js/index.js"></script>
+    <script>
+        function reloadPage() {
+            location.reload();
+        }
+
+        function hamburgerClick() {
+            const sideNav = document.getElementById("sidenav")
+            const contentContainer = document.getElementById("content-container")
+            console.log(sideNav.style.display)
+            if (sideNav.style.display !== "block") {
+                sideNav.style.display = "block"
+            } else if (sideNav.style.display === "block") {
+                sideNav.style.display = "none"
+            }
+        }
+    </script>
+    <aside id="sidenav" class="w-full sm:w-1/3 md:w-1/4 px-2">
+        <div class="sticky top-0 pr-6 w-full">
+            <button id="sidebar-close-sidebar" onclick="hamburgerClick()" class="icon-button" type="button"
+            title="Toggle Table of Contents" aria-label="Toggle Table of Contents"
+            aria-controls="sidebar" aria-expanded="true">
+                <i class="fa fa-xmark"></i>
+            </button>
+            <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden">
+                <h4 id="getting-started">Getting Started</h4>
+<ul>
+<li><a href="/bbook//intro.html">Intro</a></li>
+<li><a href="/bbook//getting_started.html">Getting Started</a></li>
+<li><a href="/bbook//syntax_highlighting.html">Syntax Highlighting</a></li>
+<li><a href="/bbook//diagrams.html">Diagrams</a></li>
+<li><a href="/bbook//wasm.html">WASM Embedding</a></li>
+<li><a href="/bbook//deploy.html">Deploy</a></li>
+<li><a href="/bbook//themes.html">Themes</a></li>
+</ul>
+<h4 id="planning">Planning</h4>
+<ul>
+<li><a href="/bbook//todos.html">ToDos</a></li>
+</ul>
+
+            </ol>
+        </div>
+    </aside>
+
+    <div class="container ">
+        <div id="content-container" class="flex flex-row flex-wrap py-4">
+            <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
+                <top-bar class="mt-auto flex justify-between">
+                    <left-buttons>
+                        <button id="sidebar-toggle" onclick="hamburgerClick()" class="icon-button" type="button"
+                            title="Toggle Table of Contents" aria-label="Toggle Table of Contents"
+                            aria-controls="sidebar" aria-expanded="true">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </left-buttons>
+
+                    <h1 class="menu-title  md-6"><a href="/bbook/">banana book</a></h1>
+
+                    <right-buttons>
+
+                    </right-buttons>
+                </top-bar>
+
+
+                <h1 id="wasm-embedding">WASM Embedding</h1>
+<blockquote>
+<p>note: currently only golang wasm files are supported.  However, you may be able to get this to work if you provide the necessary glue code</p>
+</blockquote>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">go-wasm-canvas</span> 
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;wasm_example/spectrum.wasm&#34;</span> 
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">400</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">530</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>&lt;/<span style="color:#f92672">go-wasm-canvas</span>&gt;
+</span></span></code></pre><p><go-wasm-canvas src="wasm_example/spectrum.wasm" height="400" width="530"><br/>
+</go-wasm-canvas></p>
+
+
+                <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="/bbook//diagrams.html" class="nav-chapters previous" title="Previous chapter"
+                        aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="/bbook//deploy.html" class="nav-chapters next" title="Next chapter"
+                        aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </nav>
+
+            </main>
+        </div>
+    </div>
+
+    <footer class="mt-auto">
+    </footer>
+
+</body>
+
+</html>
