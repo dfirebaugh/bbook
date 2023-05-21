@@ -86,7 +86,7 @@
 
                 <h1 id="wasm-embedding">WASM Embedding</h1>
 <blockquote>
-<p>note: currently only golang wasm files are supported.  However, you may be able to get this to work if you provide the necessary glue code</p>
+<p>note: currently only golang wasm files are supported.  However, if you are compiling to wasm from another language, you may be able to get this to work if you provide the necessary glue code</p>
 </blockquote>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">go-wasm-canvas</span> 
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;wasm_example/spectrum.wasm&#34;</span> 
@@ -96,6 +96,7 @@
 <go-wasm-canvas src="wasm_example/spectrum.wasm" height="400" width="530">
 </go-wasm-canvas>
 </center>
+
 
                 <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="/bbook//diagrams.html" class="nav-chapters previous" title="Previous chapter"
