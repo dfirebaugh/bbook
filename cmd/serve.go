@@ -76,7 +76,8 @@ func serveSite() {
 				if !ok {
 					return
 				}
-				if event.Op&fsnotify.Write == fsnotify.Write {
+				// if event.Op&fsnotify.Write == fsnotify.Write || event.Op&fsnotify.Create == fsnotify.Create {
+				if event.Has(fsnotify.Write) || event.Has(fsnotify.Create) {
 					log.Println("Reloading site due to file change:", event.Name)
 
 					buildSite()

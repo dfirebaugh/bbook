@@ -1,5 +1,5 @@
-# Syntax Highlighting
 
+# Syntax Highlighting
 <script>
 console.log("hello, world!")
 </script>

@@ -4,6 +4,7 @@
 Here is a simple bash script that can deploy to gh-pages.
 
 
+## Bash
 
 ```bash
 #!/bin/bash
@@ -20,4 +21,40 @@ git add .
 git commit -am "Static site deploy"
 git push github gh-pages --force
 cd ..
+```
+
+
+## Github Action
+
+```bash
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '^1.19.x'
+
+    - name: Run bbook
+      run: |
+        cd docs
+        bbook build
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/.book
 ```
