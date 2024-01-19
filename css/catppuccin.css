@@ -412,3 +412,8 @@
 .outline-ctp-pink {
     outline-color: rgb(var(--ctp-pink))
 }
+
+[type='checkbox'],
+[type='radio'] {
+    color: #578c98;
+}
