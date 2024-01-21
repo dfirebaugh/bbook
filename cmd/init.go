@@ -57,7 +57,7 @@ func writeInitialSummaryMD() {
 		f, _ := os.OpenFile("./src/SUMMARY.md", os.O_WRONLY|os.O_CREATE, 0666)
 		defer f.Close()
 
-		f.Write([]byte("\n# Summary\n- [Intro](./intro.md)"))
+		f.Write([]byte("\n## Summary\n- [Intro](./intro.md)"))
 	}
 }
 
