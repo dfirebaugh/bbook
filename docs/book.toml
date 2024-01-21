@@ -6,4 +6,4 @@ title = "banana book"
 
 [output.html]
 default-theme = "simple"
-site-url = "/bbook/"
+site-url = "/bbook"

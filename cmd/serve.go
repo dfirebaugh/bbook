@@ -26,6 +26,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/sirupsen/logrus"
 
@@ -51,7 +52,9 @@ func init() {
 func serveSite() {
 	buildSite()
 
-	http.Handle(conf.Output["html"].SiteURL, http.StripPrefix(conf.Output["html"].SiteURL, http.FileServer(http.Dir(".book"))))
+	siteURL := ensureTrailingSlash(conf.Output["html"].SiteURL)
+
+	http.Handle(siteURL, http.StripPrefix(siteURL, http.FileServer(http.Dir(".book"))))
 
 	http.HandleFunc("/reload", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "<html><body><script>reloadPage();</script></body></html>")
@@ -109,4 +112,11 @@ func readSummary() []parser.PageLink {
 	}
 
 	return links
+}
+
+func ensureTrailingSlash(url string) string {
+	if url == "/" && !strings.HasSuffix(url, "/") {
+		return url
+	}
+	return url + "/"
 }

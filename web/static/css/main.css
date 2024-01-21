@@ -4,6 +4,8 @@
 
 body {
     height: 100vh;
+    margin-top: 0;
+    font-family: 'Merriweather', serif;
 }
 
 #sidenav ul li {
@@ -35,13 +37,19 @@ top-bar {
 
 #content-container {
     justify-content: space-around;
-    width: 100vw;
+    width: 50vw;
+    padding-left: 25vw;
 }
 
 @media (max-width: 960px) {
     #sidenav {
         width: 100vw;
         display: none;
+    }
+
+    #content-container {
+        width: 100vw;
+        padding-left: 0vw;
     }
 
     #sidebar-close-sidebar {
