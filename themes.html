@@ -37,15 +37,10 @@
             }
         }
     </script>
-    <aside id="sidenav" class="w-full sm:w-1/3 md:w-1/4 px-2">
-        <div class="sticky top-0 pr-6 w-full">
-            <button id="sidebar-close-sidebar" onclick="hamburgerClick()" class="icon-button" type="button"
-            title="Toggle Table of Contents" aria-label="Toggle Table of Contents"
-            aria-controls="sidebar" aria-expanded="true">
-                <i class="fa fa-xmark"></i>
-            </button>
-            <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden">
-                <h4 id="getting-started">Getting Started</h4>
+    <bb-navmenu id="sidenav" theme="simple"
+        class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+        <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
+            <h4 id="getting-started">Getting Started</h4>
 <ul>
 <li><a href="/bbook//intro.html">Intro</a></li>
 <li><a href="/bbook//getting_started.html">Getting Started</a></li>
@@ -60,29 +55,13 @@
 <li><a href="/bbook//todos.html">ToDos</a></li>
 </ul>
 
-            </ol>
-        </div>
-    </aside>
+        </ol>
+    </bb-navmenu>
 
     <div class="container ">
         <div id="content-container" class="flex flex-row flex-wrap py-4">
             <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
-                <top-bar class="mt-auto flex justify-between">
-                    <left-buttons>
-                        <button id="sidebar-toggle" onclick="hamburgerClick()" class="icon-button" type="button"
-                            title="Toggle Table of Contents" aria-label="Toggle Table of Contents"
-                            aria-controls="sidebar" aria-expanded="true">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </left-buttons>
-
-                    <h1 class="menu-title  md-6"><a href="/bbook/">banana book</a></h1>
-
-                    <right-buttons>
-
-                    </right-buttons>
-                </top-bar>
-
+                <bb-topbar theme="simple" url="/bbook/" title="banana book"></bb-topbar>
 
                 <h1 id="themes">Themes</h1>
 <table>
@@ -105,16 +84,8 @@
 </table>
 
 
-                <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="/bbook//deploy.html" class="nav-chapters previous" title="Previous chapter"
-                        aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a rel="next" href="/bbook//todos.html" class="nav-chapters next" title="Next chapter"
-                        aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </nav>
+                <bb-navbtns theme="simple" class="nav-wide-wrapper" theme="simple" next=" /bbook//todos.html"
+                    prev="/bbook//deploy.html"></bb-navbtns>
 
             </main>
         </div>
