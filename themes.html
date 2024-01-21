@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="/bbook//css/tailwind.css" rel="stylesheet">
-    <link href="/bbook//css/catppuccin.css" rel="stylesheet">
-    <link href="/bbook//css/prose.css" rel="stylesheet">
-    <link href="/bbook//css/main.css" rel="stylesheet">
-    <link href="/bbook//css/theme.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="/bbook//favicon.png" />
+    <link href="/bbook/css/catppuccin.css" rel="stylesheet">
+    <link href="/bbook/css/prose.css" rel="stylesheet">
+    <link href="/bbook/css/main.css" rel="stylesheet">
+    <link href="/bbook/css/theme.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="/bbook/favicon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -20,7 +20,7 @@
 </head>
 
 <body class="simple ">
-    <script type="module" src="/bbook//js/index.js"></script>
+    <script type="module" src="/bbook/js/index.js"></script>
     <script>
         function reloadPage() {
             location.reload();
@@ -42,17 +42,17 @@
         <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
             <h4 id="getting-started">Getting Started</h4>
 <ul>
-<li><a href="/bbook//intro.html">Intro</a></li>
-<li><a href="/bbook//getting_started.html">Getting Started</a></li>
-<li><a href="/bbook//syntax_highlighting.html">Syntax Highlighting</a></li>
-<li><a href="/bbook//diagrams.html">Diagrams</a></li>
-<li><a href="/bbook//wasm.html">WASM Embedding</a></li>
-<li><a href="/bbook//deploy.html">Deploy</a></li>
-<li><a href="/bbook//themes.html">Themes</a></li>
+<li><a href="/bbook/intro.html">Intro</a></li>
+<li><a href="/bbook/getting_started.html">Getting Started</a></li>
+<li><a href="/bbook/syntax_highlighting.html">Syntax Highlighting</a></li>
+<li><a href="/bbook/diagrams.html">Diagrams</a></li>
+<li><a href="/bbook/wasm.html">WASM Embedding</a></li>
+<li><a href="/bbook/deploy.html">Deploy</a></li>
+<li><a href="/bbook/themes.html">Themes</a></li>
 </ul>
 <h4 id="planning">Planning</h4>
 <ul>
-<li><a href="/bbook//todos.html">ToDos</a></li>
+<li><a href="/bbook/todos.html">ToDos</a></li>
 </ul>
 
         </ol>
@@ -61,7 +61,7 @@
     <div class="container ">
         <div id="content-container" class="flex flex-row flex-wrap py-4">
             <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
-                <bb-topbar theme="simple" url="/bbook/" title="banana book"></bb-topbar>
+                <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
 
                 <h1 id="themes">Themes</h1>
 <table>
@@ -84,8 +84,8 @@
 </table>
 
 
-                <bb-navbtns theme="simple" class="nav-wide-wrapper" theme="simple" next=" /bbook//todos.html"
-                    prev="/bbook//deploy.html"></bb-navbtns>
+                <bb-navbtns theme="simple" class="nav-wide-wrapper" theme="simple" next=" /bbook/todos.html"
+                    prev="/bbook/deploy.html"></bb-navbtns>
 
             </main>
         </div>
