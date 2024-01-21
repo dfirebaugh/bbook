@@ -37,51 +37,22 @@
             }
         }
     </script>
-    <aside id="sidenav" class="w-full sm:w-1/3 md:w-1/4 px-2">
-        <div class="sticky top-0 pr-6 w-full">
-            <button id="sidebar-close-sidebar" onclick="hamburgerClick()" class="icon-button" type="button"
-            title="Toggle Table of Contents" aria-label="Toggle Table of Contents"
-            aria-controls="sidebar" aria-expanded="true">
-                <i class="fa fa-xmark"></i>
-            </button>
-            <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden">
-                {{.NavLinks}}
-            </ol>
-        </div>
-    </aside>
+    <bb-navmenu id="sidenav" theme="{{.Theme}}"
+        class="{{.Theme}} fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+        <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
+            {{.NavLinks}}
+        </ol>
+    </bb-navmenu>
 
     <div class="container ">
         <div id="content-container" class="flex flex-row flex-wrap py-4">
             <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
-                <top-bar class="mt-auto flex justify-between">
-                    <left-buttons>
-                        <button id="sidebar-toggle" onclick="hamburgerClick()" class="icon-button" type="button"
-                            title="Toggle Table of Contents" aria-label="Toggle Table of Contents"
-                            aria-controls="sidebar" aria-expanded="true">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </left-buttons>
-
-                    <h1 class="menu-title  md-6"><a href="{{.SiteURL}}">{{.BookTitle}}</a></h1>
-
-                    <right-buttons>
-
-                    </right-buttons>
-                </top-bar>
-
+                <bb-topbar theme="{{.Theme}}" url="{{.SiteURL}}" title="{{.BookTitle}}"></bb-topbar>
 
                 {{.Body}}
 
-                <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="{{.PreviousPage}}" class="nav-chapters previous" title="Previous chapter"
-                        aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a rel="next" href="{{.NextPage}}" class="nav-chapters next" title="Next chapter"
-                        aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </nav>
+                <bb-navbtns theme="{{.Theme}}" class="nav-wide-wrapper" theme="{{.Theme}}" next=" {{.NextPage}}"
+                    prev="{{.PreviousPage}}"></bb-navbtns>
 
             </main>
         </div>

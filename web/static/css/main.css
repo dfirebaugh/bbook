@@ -1,3 +1,7 @@
+:root {
+    --secondary-background-color: whitesmoke;
+}
+
 body {
     height: 100vh;
 }

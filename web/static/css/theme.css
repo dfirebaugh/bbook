@@ -1,11 +1,16 @@
 .catppuccin-simple {
     background-color: rgba(var(--ctp-crust));
+    --secondary-background-color:
+        rgba(var(--ctp-pink), .05),
+        rgba(var(--ctp-crust));
 }
 
 .catppuccin-simple ul li {
     color: rgba(var(--ctp-text), .4);
 }
 
+.catppuccin-simple a,
+.catppuccin-simple a:visited,
 .catppuccin-simple h1,
 .catppuccin-simple h2,
 .catppuccin-simple h3,
