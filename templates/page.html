@@ -32,35 +32,33 @@
             console.log(sideNav.style.display)
             if (sideNav.style.display !== "block") {
                 sideNav.style.display = "block"
+                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr"
             } else if (sideNav.style.display === "block") {
+                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr"
                 sideNav.style.display = "none"
             }
         }
     </script>
-    <bb-navmenu id="sidenav" theme="{{.Theme}}"
-        class="{{.Theme}} fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
-        <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
-            {{.NavLinks}}
-        </ol>
-    </bb-navmenu>
 
-    <div class="container ">
+
+    <div class="container">
         <div id="content-container" class="flex flex-row flex-wrap py-4">
-            <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
-                <bb-topbar theme="{{.Theme}}" url="{{.SiteURL}}" title="{{.BookTitle}}"></bb-topbar>
-
-                {{.Body}}
-
-                <bb-navbtns theme="{{.Theme}}" class="nav-wide-wrapper" theme="{{.Theme}}" next=" {{.NextPage}}"
-                    prev="{{.PreviousPage}}"></bb-navbtns>
-
-            </main>
+            <bb-navmenu id="sidenav" theme="{{.Theme}}"
+            class="{{.Theme}} fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+                <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
+                    {{.NavLinks}}
+                </ol>
+            </bb-navmenu>
+            <bb-navbtn class=".navbtn" theme="{{.Theme}}" nav-type="prev" href="{{.PreviousPage}}"></bb-navbtn>
+            <main-container>
+                <main role="main" class="prose md-content">
+                    <bb-topbar theme="{{.Theme}}" url="{{.SiteURL}}" title="{{.BookTitle}}"></bb-topbar>
+                    {{.Body}}
+                </main>
+            </main-container>
+            <bb-navbtn class=".navbtn" theme="{{.Theme}}" nav-type="next" href="{{.NextPage}}"></bb-navbtn>
         </div>
     </div>
-
-    <footer class="mt-auto">
-    </footer>
-
 </body>
 
 </html>
