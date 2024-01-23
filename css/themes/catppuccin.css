@@ -417,3 +417,97 @@
 [type='radio'] {
     color: #578c98;
 }
+
+.catppuccin-simple {
+    background-color: rgba(var(--ctp-crust));
+    --primary-color: rgba(var(--ctp-pink), .6);
+    --secondary-background-color: rgba(var(--ctp-pink), .05);
+}
+
+.catppuccin-simple ul li {
+    color: rgba(var(--ctp-text), .4);
+}
+
+.catppuccin-simple a,
+.catppuccin-simple a:visited,
+.catppuccin-simple h1,
+.catppuccin-simple h2,
+.catppuccin-simple h3,
+.catppuccin-simple h4,
+.catppuccin-simple h5,
+.catppuccin-simple h6 {
+    color: rgba(var(--ctp-pink), .6) !important;
+}
+
+.catppuccin-simple p {
+    color: rgba(var(--ctp-text), .6);
+}
+
+.catppuccin-simple li {
+    color: rgba(var(--ctp-text), .6);
+}
+
+.catppuccin-simple a {
+    color: rgba(var(--ctp-sky), .6);
+    text-decoration: none;
+}
+
+.catppuccin-simple a:hover {
+    color: rgba(var(--ctp-sky), .9);
+}
+
+.catppuccin-simple img {
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.catppuccin-simple pre {
+    background-color: rgba(var(--ctp-overlay2), .1);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+
+.catppuccin-simple p code {
+    background-color: rgba(var(--ctp-overlay2), .1);
+}
+
+.catppuccin-simple code {
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    color: rgba(var(--ctp-mauve), .5);
+}
+
+.catppuccin-simple table {
+    color: rgba(var(--ctp-mauve), .6);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    text-align: center;
+}
+
+.catppuccin-simple thead {
+    background-color: rgba(var(--ctp-overlay1), .7);
+    border-bottom-color: rgba(var(--ctp-pink), .4);
+    color: rgba(var(--ctp-text), .9);
+}
+
+.catppuccin-simple tbody {
+    background-color: rgba(var(--ctp-overlay3), .8);
+}
+
+.catppuccin-simple tr {
+    border-bottom-color: rgba(var(--ctp-pink), .4);
+    border-left-color: rgb(var(--ctp-pink));
+}
+
+.catppuccin-simple th {
+    color: rgba(var(--ctp-overlay1), var(--tw-text-opacity));
+}
+
+.catppuccin-simple tr:nth-child(even) {
+    background: rgba(var(--ctp-overlay2), .1)
+}
+
+.catppuccin-simple tr:nth-child(odd) {
+    background: rgba(var(--ctp-overlay3), .1)
+}
+
+.catppuccin-simple #sidenav {
+    background-color: rgba(var(--ctp-pink), .05);
+}

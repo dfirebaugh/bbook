@@ -9,7 +9,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
         display: grid;
         align-items: center;
         justify-content: space-between;
-        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-columns: 1fr 4fr 1fr;
+        background-color: var(--secondary-background-color) !important;
     }
 
     a {
@@ -30,7 +31,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     .icon-button i.fa {
         font-size: 1.2em;
-        color: #333;
+        color: var(--primary-color);
     }
 
     .icon-button:hover, .icon-button:active {
@@ -40,6 +41,19 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
     #site-title:hover {
         cursor: pointer;
         text-decoration: underline;
+    }
+
+    .menu-title {
+        display:flex;
+        justify-content: center;
+    }
+    left-buttons {
+        padding-left: 2rem;
+    }
+
+    .right-buttons {
+        justify-self: end;
+        padding-right: 2rem;
     }
 </style>
     <span class="top-bar">
@@ -55,14 +69,28 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
             </a>
         </h1>
 
-        <right-buttons>
-        </right-buttons>
+        <div class="right-buttons">
+            <a id="repo-link" href="" target="_blank" class="icon-button" title="GitHub Repository">
+                <i id="repo-icon" src="" alt="GitHub" />
+            </a>
+            <a id="edit-page" href="" target="_blank" class="icon-button" title="Edit Page">
+                <i class="fa fa-edit"></i>
+            </a>
+        </div>
     </span>
 `;
 
 class TopBar extends HTMLElement {
     static get observedAttributes() {
-        return ['title', 'url', 'theme'];
+        return [
+            'title',
+            'url',
+            'theme',
+            'hideSideBar',
+            'repoIcon',
+            'repoURL',
+            'editURL',
+        ];
     }
 
     constructor() {
@@ -74,6 +102,8 @@ class TopBar extends HTMLElement {
     connectedCallback() {
         this.updateTitleAndUrl();
         this.updateTheme();
+        this.hideSideBar();
+        this.updateRepoAndEditLinks();
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -82,6 +112,8 @@ class TopBar extends HTMLElement {
                 this.updateTitleAndUrl();
             } else if (name === 'theme') {
                 this.updateTheme();
+            } else if (name === 'repoIcon' || name === 'repoURL' || name === 'editURL') {
+                this.updateRepoAndEditLinks();
             }
         }
     }
@@ -95,9 +127,48 @@ class TopBar extends HTMLElement {
         if (url) titleElement.href = url;
     }
 
+    hideSideBar() {
+        if (this.getAttribute('hideSideBar') !== 'true') return;
+
+        const sidebarToggle = this.shadowRoot.querySelector("#sidebar-toggle");
+        if (sidebarToggle) {
+            sidebarToggle.style.display = 'none';
+        }
+    }
+
     updateTheme() {
         const theme = this.getAttribute('theme');
         if (theme) this.shadowRoot.host.className = theme;
+    }
+
+    updateRepoAndEditLinks() {
+        const repoLink = this.shadowRoot.querySelector("#repo-link");
+        const repoIcon = this.shadowRoot.querySelector("#repo-icon");
+        const editLink = this.shadowRoot.querySelector("#edit-page");
+
+        const repoURL = this.getAttribute('repoURL');
+        const repoIconClass = this.getAttribute('repoIcon');
+        const editURL = this.getAttribute('editURL');
+
+        if (repoURL) {
+            repoLink.href = repoURL;
+            repoLink.style.display = 'inline';
+            if (repoIconClass) {
+                repoIcon.className = `fa-brands ${repoIconClass}`;
+                repoIcon.style.display = 'inline';
+            } else {
+                repoIcon.style.display = 'none';
+            }
+        } else {
+            repoLink.style.display = 'none';
+        }
+
+        if (editURL) {
+            editLink.href = editURL;
+            editLink.style.display = 'inline';
+        } else {
+            editLink.style.display = 'none';
+        }
     }
 }
 

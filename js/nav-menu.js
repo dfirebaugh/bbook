@@ -8,6 +8,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 button {
     background: none;
     border: none;
+    color: var(--primary-color);
 }
 </style>
 

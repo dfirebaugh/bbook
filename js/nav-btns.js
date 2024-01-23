@@ -23,6 +23,10 @@ a:hover {
 a {
     color: var(--primary-color);
 }
+
+.nav-wide-wrapper {
+    display: flex;
+}
 </style>
 
 <span class="nav-wide-wrapper" aria-label="Page navigation">
@@ -61,12 +65,16 @@ class NavBtns extends HTMLElement {
         const href = this.getAttribute('href');
         const prev = this.shadowRoot.querySelector('.previous');
         const next = this.shadowRoot.querySelector('.next');
+        const wrapper = this.shadowRoot.querySelector('.nav-wide-wrapper');
+
 
         if (navType === 'prev') {
             next?.remove();
+            wrapper.style.justifyContent = 'left';
             if (prev) prev.href = href;
         } else if (navType === 'next') {
             prev?.remove();
+            wrapper.style.justifyContent = 'right';
             if (next) next.href = href;
         }
     }

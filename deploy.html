@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="/bbook/css/catppuccin.css" rel="stylesheet">
-    <link href="/bbook/css/prose.css" rel="stylesheet">
-    <link href="/bbook/css/main.css" rel="stylesheet">
+    <link href="/bbook/css/themes/catppuccin.css" rel="stylesheet">
+    <link href="/bbook/css/themes/dark-blue.css" rel="stylesheet">
+    <link href="/bbook/css/themes/simple.css" rel="stylesheet">
+    <link href="/bbook/css/themes/navy.css" rel="stylesheet">
+    <link href="/bbook/css/themes/dark.css" rel="stylesheet">
+
+    <link href="/bbook/css/core/prose.css" rel="stylesheet">
+    <link href="/bbook/css/core/main.css" rel="stylesheet">
     <link href="/bbook/css/theme.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="/bbook/favicon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
@@ -18,9 +23,11 @@
 
     
     <title>Deploy</title>
+
+    
 </head>
 
-<body class="simple ">
+<body class="dark">
     <script type="module" src="/bbook/js/index.js"></script>
     <script>
         function reloadPage() {
@@ -43,9 +50,19 @@
 
 
     <div class="container">
+        <bb-topbar
+            class="dark"
+            url="/bbook"
+            title="banana book"
+            hideSideBar="false"
+            repoIcon="fa-github"
+            repoURL="https://github.com/dfirebaugh/bbook"
+            editPageURL="%25!%28EXTRA%20string=/bbook,%20string=./deploy.md%29"
+            >
+        </bb-topbar>
         <div id="content-container" class="flex flex-row flex-wrap py-4">
-            <bb-navmenu id="sidenav" theme="simple"
-            class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+            
+            <bb-navmenu id="sidenav" class="dark fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
                 <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
                     <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
 <li><a href="/bbook/intro.html">Intro</a></li>
@@ -63,10 +80,10 @@
 
                 </ol>
             </bb-navmenu>
-            <bb-navbtn class=".navbtn" theme="simple" nav-type="prev" href="/bbook/extending.html"></bb-navbtn>
+            
+            <bb-navbtn class=".navbtn dark" nav-type="prev" href="/bbook/extending.html"></bb-navbtn>
             <main-container>
                 <main role="main" class="prose md-content">
-                    <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
                     <h1 id="deploy"><a href="#deploy" class="header-anchor">Deploy</a></h1><p>Here is a simple bash script that can deploy to gh-pages.</p>
 <h2 id="bash"><a href="#bash" class="header-anchor">Bash</a></h2><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#75715e">#!/bin/bash
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#75715e"></span>
@@ -115,7 +132,7 @@
 </span></span></code></pre>
                 </main>
             </main-container>
-            <bb-navbtn class=".navbtn" theme="simple" nav-type="next" href="/bbook/themes.html"></bb-navbtn>
+            <bb-navbtn class=".navbtn dark" nav-type="next" href="/bbook/themes.html"></bb-navbtn>
         </div>
     </div>
 

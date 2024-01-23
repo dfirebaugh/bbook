@@ -44,9 +44,6 @@ class GoWasmCanvas extends HTMLElement {
         </script>
   `;
     }
-
-    render() {
-    }
 }
 
 window.customElements.define('go-wasm-canvas', GoWasmCanvas);
