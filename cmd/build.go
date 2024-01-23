@@ -195,27 +195,37 @@ func buildPage(page parser.Page, tmpl *template.Template, nextPage string, previ
 	}
 
 	err = tmpl.Execute(f, struct {
-		BookTitle     string
-		SiteURL       string
-		Title         string
-		NextPage      string
-		PreviousPage  string
-		Theme         string
-		Body          template.HTML
-		NavLinks      template.HTML
-		AdditionalJS  []string
-		AdditionalCSS []string
+		BookTitle       string
+		SiteURL         string
+		Title           string
+		CurrentPage     string
+		NextPage        string
+		PreviousPage    string
+		Theme           string
+		Body            template.HTML
+		NavLinks        template.HTML
+		AdditionalJS    []string
+		AdditionalCSS   []string
+		HideSidebar     bool
+		GithubRepoURL   string
+		GithubRepoIcon  string
+		EditURLTemplate string
 	}{
-		BookTitle:     conf.Book.Title,
-		SiteURL:       conf.Output["html"].SiteURL,
-		Title:         page.Title,
-		NextPage:      addSiteURL(mdLinkToHTMLLink(nextPage)),
-		PreviousPage:  addSiteURL(mdLinkToHTMLLink(previousPage)),
-		Body:          template.HTML(getBodyChildren([]byte(content))),
-		NavLinks:      template.HTML(getBodyChildren([]byte(navbar))),
-		Theme:         conf.Output["html"].DefaultTheme,
-		AdditionalJS:  conf.Output["html"].AdditionalJS,
-		AdditionalCSS: conf.Output["html"].AdditionalCSS,
+		BookTitle:       conf.Book.Title,
+		SiteURL:         conf.Output["html"].SiteURL,
+		Title:           page.Title,
+		CurrentPage:     page.URL,
+		NextPage:        addSiteURL(mdLinkToHTMLLink(nextPage)),
+		PreviousPage:    addSiteURL(mdLinkToHTMLLink(previousPage)),
+		Body:            template.HTML(getBodyChildren([]byte(content))),
+		NavLinks:        template.HTML(getBodyChildren([]byte(navbar))),
+		Theme:           conf.Output["html"].DefaultTheme,
+		AdditionalJS:    conf.Output["html"].AdditionalJS,
+		AdditionalCSS:   conf.Output["html"].AdditionalCSS,
+		HideSidebar:     conf.Output["html"].HideSidebar,
+		GithubRepoURL:   conf.Output["html"].GithubRepoURL,
+		GithubRepoIcon:  conf.Output["html"].GithubRepoIcon,
+		EditURLTemplate: conf.Output["html"].EditURLTemplate,
 	})
 	if err != nil {
 		log.Fatal(err)

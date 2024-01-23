@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="{{.SiteURL}}/css/catppuccin.css" rel="stylesheet">
-    <link href="{{.SiteURL}}/css/prose.css" rel="stylesheet">
-    <link href="{{.SiteURL}}/css/main.css" rel="stylesheet">
+    <link href="{{.SiteURL}}/css/themes/catppuccin.css" rel="stylesheet">
+    <link href="{{.SiteURL}}/css/themes/dark-blue.css" rel="stylesheet">
+    <link href="{{.SiteURL}}/css/themes/simple.css" rel="stylesheet">
+    <link href="{{.SiteURL}}/css/themes/navy.css" rel="stylesheet">
+    <link href="{{.SiteURL}}/css/themes/dark.css" rel="stylesheet">
+
+    <link href="{{.SiteURL}}/css/core/prose.css" rel="stylesheet">
+    <link href="{{.SiteURL}}/css/core/main.css" rel="stylesheet">
     <link href="{{.SiteURL}}/css/theme.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{{.SiteURL}}/favicon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
@@ -20,9 +25,17 @@
         <link href="{{$.SiteURL}}/{{.}}" rel="stylesheet">
     {{end}}
     <title>{{.Title}}</title>
+
+    {{if .HideSidebar}}
+    <style>
+        #content-container {
+            grid-template-columns: 1fr 14fr 1fr !important;
+        }
+    </style>
+    {{end}}
 </head>
 
-<body class="{{.Theme}} ">
+<body class="{{.Theme}}">
     <script type="module" src="{{.SiteURL}}/js/index.js"></script>
     <script>
         function reloadPage() {
@@ -45,21 +58,31 @@
 
 
     <div class="container">
+        <bb-topbar
+            class="{{.Theme}}"
+            url="{{.SiteURL}}"
+            title="{{.BookTitle}}"
+            hideSideBar="{{.HideSidebar}}"
+            repoIcon="{{.GithubRepoIcon}}"
+            repoURL="{{.GithubRepoURL}}"
+            editPageURL="{{printf .EditURLTemplate .SiteURL .CurrentPage}}"
+            >
+        </bb-topbar>
         <div id="content-container" class="flex flex-row flex-wrap py-4">
-            <bb-navmenu id="sidenav" theme="{{.Theme}}"
-            class="{{.Theme}} fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+            {{if not .HideSidebar}}
+            <bb-navmenu id="sidenav" class="{{.Theme}} fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
                 <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
                     {{.NavLinks}}
                 </ol>
             </bb-navmenu>
-            <bb-navbtn class=".navbtn" theme="{{.Theme}}" nav-type="prev" href="{{.PreviousPage}}"></bb-navbtn>
+            {{end}}
+            <bb-navbtn class=".navbtn {{.Theme}}" nav-type="prev" href="{{.PreviousPage}}"></bb-navbtn>
             <main-container>
                 <main role="main" class="prose md-content">
-                    <bb-topbar theme="{{.Theme}}" url="{{.SiteURL}}" title="{{.BookTitle}}"></bb-topbar>
                     {{.Body}}
                 </main>
             </main-container>
-            <bb-navbtn class=".navbtn" theme="{{.Theme}}" nav-type="next" href="{{.NextPage}}"></bb-navbtn>
+            <bb-navbtn class=".navbtn {{.Theme}}" nav-type="next" href="{{.NextPage}}"></bb-navbtn>
         </div>
     </div>
 

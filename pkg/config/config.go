@@ -18,10 +18,14 @@ type BookConfig struct {
 }
 
 type Theme struct {
-	DefaultTheme  string   `toml:"default-theme"`
-	SiteURL       string   `toml:"site-url"`
-	AdditionalJS  []string `toml:"additional-js"`
-	AdditionalCSS []string `toml:"additional-css"`
+	DefaultTheme    string   `toml:"default-theme"`
+	SiteURL         string   `toml:"site-url"`
+	AdditionalJS    []string `toml:"additional-js"`
+	AdditionalCSS   []string `toml:"additional-css"`
+	HideSidebar     bool     `toml:"hide-sidebar"`
+	GithubRepoURL   string   `toml:"github-repo-url"`
+	GithubRepoIcon  string   `toml:"github-repo-icon"`
+	EditURLTemplate string   `toml:"edit-url-template"`
 }
 
 func ReadConfig(filePath string) (*Config, error) {
