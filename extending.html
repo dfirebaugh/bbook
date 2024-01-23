@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/bbook/css/catppuccin.css" rel="stylesheet">
+    <link href="/bbook/css/prose.css" rel="stylesheet">
+    <link href="/bbook/css/main.css" rel="stylesheet">
+    <link href="/bbook/css/theme.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="/bbook/favicon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    
+    <title>Extending</title>
+</head>
+
+<body class="simple ">
+    <script type="module" src="/bbook/js/index.js"></script>
+    <script>
+        function reloadPage() {
+            location.reload();
+        }
+
+        function hamburgerClick() {
+            const sideNav = document.getElementById("sidenav")
+            const contentContainer = document.getElementById("content-container")
+            console.log(sideNav.style.display)
+            if (sideNav.style.display !== "block") {
+                sideNav.style.display = "block"
+                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr"
+            } else if (sideNav.style.display === "block") {
+                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr"
+                sideNav.style.display = "none"
+            }
+        }
+    </script>
+
+
+    <div class="container">
+        <div id="content-container" class="flex flex-row flex-wrap py-4">
+            <bb-navmenu id="sidenav" theme="simple"
+            class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+                <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
+                    <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
+<li><a href="/bbook/intro.html">Intro</a></li>
+<li><a href="/bbook/getting_started.html">Getting Started</a></li>
+<li><a href="/bbook/syntax_highlighting.html">Syntax Highlighting</a></li>
+<li><a href="/bbook/diagrams.html">Diagrams</a></li>
+<li><a href="/bbook/wasm.html">WASM Embedding</a></li>
+<li><a href="/bbook/extending.html">Extending</a></li>
+<li><a href="/bbook/deploy.html">Deploy</a></li>
+<li><a href="/bbook/themes.html">Themes</a></li>
+</ul>
+<h4 id="planning"><a href="#planning" class="header-anchor">Planning</a></h4><ul>
+<li><a href="/bbook/todos.html">ToDos</a></li>
+</ul>
+
+                </ol>
+            </bb-navmenu>
+            <bb-navbtn class=".navbtn" theme="simple" nav-type="prev" href="/bbook/wasm.html"></bb-navbtn>
+            <main-container>
+                <main role="main" class="prose md-content">
+                    <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
+                    <h1 id="extending"><a href="#extending" class="header-anchor">Extending</a></h1><h2 id="adding-additional-js-to-the-configuration"><a href="#adding-additional-js-to-the-configuration" class="header-anchor">Adding Additional JS to the Configuration</a></h2><p>You can enhance the functionality and styling of your site by adding custom JavaScript (JS) and Cascading Style Sheets (CSS) files. To do this, use the <code>additional-js</code> and <code>additional-css</code> fields in your <code>book.toml</code> configuration file.</p>
+<h2 id="steps-to-include-additional-js"><a href="#steps-to-include-additional-js" class="header-anchor">Steps to Include Additional JS</a></h2><ol>
+<li>
+<p><strong>Locate the Configuration File:</strong><br/>
+Ensure you’re editing the <code>book.toml</code> file in your project’s root directory.</p>
+</li>
+<li>
+<p><strong>Specify JS Files:</strong><br/>
+Under the <code>[output.html]</code> section, add an <code>additional-js</code> field. List the paths to your JavaScript files relative to the source directory. For example:</p>
+</li>
+</ol>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>[<span style="color:#a6e22e">output</span>.<span style="color:#a6e22e">html</span>]
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#a6e22e">additional-js</span> = [<span style="color:#e6db74">&#34;js/custom-script.js&#34;</span>, <span style="color:#e6db74">&#34;js/another-script.js&#34;</span>]
+</span></span></code></pre><h2 id="adding-additional-css-to-the-configuration"><a href="#adding-additional-css-to-the-configuration" class="header-anchor">Adding Additional CSS to the Configuration</a></h2><p>To include custom CSS files in your project, you can use the <code>additional-css</code> field in the <code>book.toml</code> configuration file. Follow these steps to add CSS files:</p>
+<ol>
+<li>
+<p><strong>Locate the Configuration File:</strong><br/>
+Open the <code>book.toml</code> file in your project’s root directory.</p>
+</li>
+<li>
+<p><strong>Specify CSS Files:</strong><br/>
+Under the <code>[output.html]</code> section, add an <code>additional-css</code> field. List the paths to your CSS files relative to the source directory. For example:</p>
+</li>
+</ol>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>[<span style="color:#a6e22e">output</span>.<span style="color:#a6e22e">html</span>]
+</span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#a6e22e">additional-css</span> = [<span style="color:#e6db74">&#34;css/custom-style.css&#34;</span>, <span style="color:#e6db74">&#34;css/another-style.css&#34;</span>]
+</span></span></code></pre>
+                </main>
+            </main-container>
+            <bb-navbtn class=".navbtn" theme="simple" nav-type="next" href="/bbook/deploy.html"></bb-navbtn>
+        </div>
+    </div>
+
+    
+</body>
+
+</html>
