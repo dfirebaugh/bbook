@@ -16,6 +16,9 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    {{range .AdditionalCSS}}
+        <link href="{{$.SiteURL}}/{{.}}" rel="stylesheet">
+    {{end}}
     <title>{{.Title}}</title>
 </head>
 
@@ -59,6 +62,10 @@
             <bb-navbtn class=".navbtn" theme="{{.Theme}}" nav-type="next" href="{{.NextPage}}"></bb-navbtn>
         </div>
     </div>
+
+    {{range .AdditionalJS}}
+    <script src="{{$.SiteURL}}/{{.}}"></script>
+    {{end}}
 </body>
 
 </html>

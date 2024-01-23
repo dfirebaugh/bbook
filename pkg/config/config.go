@@ -18,8 +18,10 @@ type BookConfig struct {
 }
 
 type Theme struct {
-	DefaultTheme string `toml:"default-theme"`
-	SiteURL      string `toml:"site-url"`
+	DefaultTheme  string   `toml:"default-theme"`
+	SiteURL       string   `toml:"site-url"`
+	AdditionalJS  []string `toml:"additional-js"`
+	AdditionalCSS []string `toml:"additional-css"`
 }
 
 func ReadConfig(filePath string) (*Config, error) {

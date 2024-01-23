@@ -79,11 +79,24 @@ func buildSite() {
 	logrus.Println("building files to the `.book` dir")
 	generateMDFiles()
 
-	os.Remove(".book")
+	os.RemoveAll(".book")
 	os.Mkdir(".book", 0777)
 	src := parser.ParseDir(conf.Book.Src)
 
-	os.Mkdir(".book", 0777)
+	// Copy additional JS and CSS files
+	for _, file := range conf.Output["html"].AdditionalJS {
+		err := copyFile(filepath.Join(conf.Book.Src, "..", file), filepath.Join(".book", file))
+		if err != nil {
+			logrus.Errorf("Error copying JS file %s: %v", file, err)
+		}
+	}
+	for _, file := range conf.Output["html"].AdditionalCSS {
+		err := copyFile(filepath.Join(conf.Book.Src, "..", file), filepath.Join(".book", file))
+		if err != nil {
+			logrus.Errorf("Error copying CSS file %s: %v", file, err)
+		}
+	}
+
 	if err := web.CopyStaticFiles(web.StaticFiles, "static", ".book/"); err != nil {
 		logrus.Error(err)
 	}
@@ -182,23 +195,27 @@ func buildPage(page parser.Page, tmpl *template.Template, nextPage string, previ
 	}
 
 	err = tmpl.Execute(f, struct {
-		BookTitle    string
-		SiteURL      string
-		Title        string
-		NextPage     string
-		PreviousPage string
-		Theme        string
-		Body         template.HTML
-		NavLinks     template.HTML
+		BookTitle     string
+		SiteURL       string
+		Title         string
+		NextPage      string
+		PreviousPage  string
+		Theme         string
+		Body          template.HTML
+		NavLinks      template.HTML
+		AdditionalJS  []string
+		AdditionalCSS []string
 	}{
-		BookTitle:    conf.Book.Title,
-		SiteURL:      conf.Output["html"].SiteURL,
-		Title:        page.Title,
-		NextPage:     addSiteURL(mdLinkToHTMLLink(nextPage)),
-		PreviousPage: addSiteURL(mdLinkToHTMLLink(previousPage)),
-		Body:         template.HTML(getBodyChildren([]byte(content))),
-		NavLinks:     template.HTML(getBodyChildren([]byte(navbar))),
-		Theme:        conf.Output["html"].DefaultTheme,
+		BookTitle:     conf.Book.Title,
+		SiteURL:       conf.Output["html"].SiteURL,
+		Title:         page.Title,
+		NextPage:      addSiteURL(mdLinkToHTMLLink(nextPage)),
+		PreviousPage:  addSiteURL(mdLinkToHTMLLink(previousPage)),
+		Body:          template.HTML(getBodyChildren([]byte(content))),
+		NavLinks:      template.HTML(getBodyChildren([]byte(navbar))),
+		Theme:         conf.Output["html"].DefaultTheme,
+		AdditionalJS:  conf.Output["html"].AdditionalJS,
+		AdditionalCSS: conf.Output["html"].AdditionalCSS,
 	})
 	if err != nil {
 		log.Fatal(err)
