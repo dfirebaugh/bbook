@@ -7,6 +7,20 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
 a {
+    position:fixed;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    width: 5vw;
+    justify-content: center;
+}
+
+a:hover {
+    background-color: var(--secondary-background-color);
+    cursor: pointer;
+}
+
+a {
     color: var(--primary-color);
 }
 </style>
@@ -23,13 +37,39 @@ a {
 </span>`;
 
 class NavBtns extends HTMLElement {
+    static get observedAttributes() {
+        return ['nav-type', 'href', 'theme'];
+    }
+
     constructor() {
         super();
-        const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.appendChild(template.content.cloneNode(true));
+        this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true));
+    }
 
-        shadowRoot.querySelector(".previous").href = this.getAttribute("prev");
-        shadowRoot.querySelector(".next").href = this.getAttribute("next");
+    connectedCallback() {
+        this.updateLinks();
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue !== newValue) {
+            this.updateLinks();
+        }
+    }
+
+    updateLinks() {
+        const navType = this.getAttribute('nav-type');
+        const href = this.getAttribute('href');
+        const prev = this.shadowRoot.querySelector('.previous');
+        const next = this.shadowRoot.querySelector('.next');
+
+        if (navType === 'prev') {
+            next?.remove();
+            if (prev) prev.href = href;
+        } else if (navType === 'next') {
+            prev?.remove();
+            if (next) next.href = href;
+        }
     }
 }
-window.customElements.define('bb-navbtns', NavBtns);
+
+window.customElements.define('bb-navbtn', NavBtns);

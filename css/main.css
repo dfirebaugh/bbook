@@ -4,7 +4,7 @@
 
 body {
     height: 100vh;
-    margin-top: 0;
+    margin: 0;
     font-family: 'Merriweather', serif;
 }
 
@@ -14,15 +14,59 @@ body {
 }
 
 #sidenav {
-    position: fixed;
     left: 0;
-    height: 100vh;
     width: 20vw;
-    /* background: whitesmoke !important; */
+    background-color: var(--secondary-background-color);
 }
 
 .navbar * {
     list-style-type: decimal;
+}
+
+.navbar a {
+    color: black;
+    text-decoration: none;
+}
+
+.navbar a.anchor {
+    display: none;
+}
+
+a.anchor {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+a.anchor .hash {
+    text-decoration: none;
+    opacity: 0;
+    margin-left: 5px;
+}
+
+a.anchor:hover .hash {
+    opacity: 1;
+}
+
+.navbar a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.icon-button i.fa {
+    font-size: 1.2em;
+    color: #8e8e8e;
+}
+
+#sidebar-close-sidebar {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#sidebar-close-sidebar i.fa {
+    font-size: 1.2em;
+    color: #333;
 }
 
 top-bar {
@@ -36,20 +80,37 @@ top-bar {
 }
 
 #content-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 14fr 1fr;
     justify-content: space-around;
-    width: 50vw;
-    padding-left: 25vw;
+    height: 100vh;
+    width: 100vw;
+}
+
+main-container {
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width: 960px) {
     #sidenav {
-        width: 100vw;
+        width: 100%;
         display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        background-color: var(--secondary-background-color);
+    }
+
+    #hamburger-menu {
+        display: block;
     }
 
     #content-container {
         width: 100vw;
         padding-left: 0vw;
+        grid-template-columns: 1fr 14fr 1fr;
     }
 
     #sidebar-close-sidebar {
@@ -62,6 +123,11 @@ top-bar {
 @media (min-width: 960px) {
     #sidenav {
         display: block;
+    }
+
+    #sidenav button {
+        background: none;
+        border: none;
     }
 
     #sidebar-close-sidebar {

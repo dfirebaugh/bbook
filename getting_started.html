@@ -32,16 +32,21 @@
             console.log(sideNav.style.display)
             if (sideNav.style.display !== "block") {
                 sideNav.style.display = "block"
+                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr"
             } else if (sideNav.style.display === "block") {
+                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr"
                 sideNav.style.display = "none"
             }
         }
     </script>
-    <bb-navmenu id="sidenav" theme="simple"
-        class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
-        <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
-            <h4 id="getting-started">Getting Started</h4>
-<ul>
+
+
+    <div class="container">
+        <div id="content-container" class="flex flex-row flex-wrap py-4">
+            <bb-navmenu id="sidenav" theme="simple"
+            class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+                <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
+                    <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
 <li><a href="/bbook/intro.html">Intro</a></li>
 <li><a href="/bbook/getting_started.html">Getting Started</a></li>
 <li><a href="/bbook/syntax_highlighting.html">Syntax Highlighting</a></li>
@@ -50,30 +55,22 @@
 <li><a href="/bbook/deploy.html">Deploy</a></li>
 <li><a href="/bbook/themes.html">Themes</a></li>
 </ul>
-<h4 id="planning">Planning</h4>
-<ul>
+<h4 id="planning"><a href="#planning" class="header-anchor">Planning</a></h4><ul>
 <li><a href="/bbook/todos.html">ToDos</a></li>
 </ul>
 
-        </ol>
-    </bb-navmenu>
-
-    <div class="container ">
-        <div id="content-container" class="flex flex-row flex-wrap py-4">
-            <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
-                <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
-
-                <h1 id="getting-started">Getting Started</h1>
-<h2 id="installation">Installation</h2>
-<h3 id="install-with-go">install with go</h3>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>go install github.com/dfirebaugh/bbook@latest
+                </ol>
+            </bb-navmenu>
+            <bb-navbtn class=".navbtn" theme="simple" nav-type="prev" href="/bbook/intro.html"></bb-navbtn>
+            <main-container>
+                <main role="main" class="prose md-content">
+                    <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
+                    <h1 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h1><h2 id="installation"><a href="#installation" class="header-anchor">Installation</a></h2><h3 id="install-with-go"><a href="#install-with-go" class="header-anchor">install with go</a></h3><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>go install github.com/dfirebaugh/bbook@latest
 </span></span></code></pre><blockquote>
 <p>Installing with go should work cross platform</p>
 </blockquote>
-<h3 id="download-a-release">Download a release</h3>
-<p><a href="https://github.com/dfirebaugh/bbook/releases/latest">https://github.com/dfirebaugh/bbook/releases/latest</a></p>
-<h3 id="building-from-source">Building from source</h3>
-<ol>
+<h3 id="download-a-release"><a href="#download-a-release" class="header-anchor">Download a release</a></h3><p><a href="https://github.com/dfirebaugh/bbook/releases/latest">https://github.com/dfirebaugh/bbook/releases/latest</a></p>
+<h3 id="building-from-source"><a href="#building-from-source" class="header-anchor">Building from source</a></h3><ol>
 <li>Pull down the git repository.</li>
 <li>cd into the directory</li>
 <li>run <code>go build</code></li>
@@ -81,32 +78,24 @@
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>git clone github.com/dfirebaugh/bbook
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>cd bbook
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>go build
-</span></span></code></pre><h2 id="make-a-book">Make a book</h2>
-<p>Navigate to a directory where you would like to create your markdown files.</p>
+</span></span></code></pre><h2 id="make-a-book"><a href="#make-a-book" class="header-anchor">Make a book</a></h2><p>Navigate to a directory where you would like to create your markdown files.</p>
 <p>Run the following command</p>
 <p><code>bbook init &lt;book name&gt;</code></p>
 <p>e.g.</p>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>bbook init bbook
 </span></span></code></pre><p>This will create a <code>book.toml</code> file that will act as your config.<br/>
 It will also create a <code>SUMMARY.md</code> file.  This is a special markdown file that will be parsed in as the navigation sidebar.</p>
-<h3 id="serve-the-static-site-locally">Serve the static site locally</h3>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>bbook serve
+<h3 id="serve-the-static-site-locally"><a href="#serve-the-static-site-locally" class="header-anchor">Serve the static site locally</a></h3><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>bbook serve
 </span></span></code></pre><p><code>bbook serve</code> will serve the <code>.book</code> dir by default.  It will also create any markdown files that are linked in the <code>SUMMARY.md</code> file (if they don’t exist).</p>
 <blockquote>
 <p>Any file changes will be automatically be rebuilt (however, auto page reload isn’t working yet).</p>
 </blockquote>
 
-
-                <bb-navbtns theme="simple" class="nav-wide-wrapper" theme="simple" next=" /bbook/syntax_highlighting.html"
-                    prev="/bbook/intro.html"></bb-navbtns>
-
-            </main>
+                </main>
+            </main-container>
+            <bb-navbtn class=".navbtn" theme="simple" nav-type="next" href="/bbook/syntax_highlighting.html"></bb-navbtn>
         </div>
     </div>
-
-    <footer class="mt-auto">
-    </footer>
-
 </body>
 
 </html>

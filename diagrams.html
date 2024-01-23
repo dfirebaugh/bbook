@@ -32,16 +32,21 @@
             console.log(sideNav.style.display)
             if (sideNav.style.display !== "block") {
                 sideNav.style.display = "block"
+                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr"
             } else if (sideNav.style.display === "block") {
+                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr"
                 sideNav.style.display = "none"
             }
         }
     </script>
-    <bb-navmenu id="sidenav" theme="simple"
-        class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
-        <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
-            <h4 id="getting-started">Getting Started</h4>
-<ul>
+
+
+    <div class="container">
+        <div id="content-container" class="flex flex-row flex-wrap py-4">
+            <bb-navmenu id="sidenav" theme="simple"
+            class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+                <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
+                    <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
 <li><a href="/bbook/intro.html">Intro</a></li>
 <li><a href="/bbook/getting_started.html">Getting Started</a></li>
 <li><a href="/bbook/syntax_highlighting.html">Syntax Highlighting</a></li>
@@ -50,23 +55,18 @@
 <li><a href="/bbook/deploy.html">Deploy</a></li>
 <li><a href="/bbook/themes.html">Themes</a></li>
 </ul>
-<h4 id="planning">Planning</h4>
-<ul>
+<h4 id="planning"><a href="#planning" class="header-anchor">Planning</a></h4><ul>
 <li><a href="/bbook/todos.html">ToDos</a></li>
 </ul>
 
-        </ol>
-    </bb-navmenu>
-
-    <div class="container ">
-        <div id="content-container" class="flex flex-row flex-wrap py-4">
-            <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
-                <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
-
-                <h1 id="diagrams">Diagrams</h1>
-<p>See the <a href="https://mermaid.js.org/syntax/flowchart.html">Mermaid Documentation</a> for more examples.</p>
-<h2 id="graph">Graph</h2>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```mermaid
+                </ol>
+            </bb-navmenu>
+            <bb-navbtn class=".navbtn" theme="simple" nav-type="prev" href="/bbook/syntax_highlighting.html"></bb-navbtn>
+            <main-container>
+                <main role="main" class="prose md-content">
+                    <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
+                    <h1 id="diagrams"><a href="#diagrams" class="header-anchor">Diagrams</a></h1><p>See the <a href="https://mermaid.js.org/syntax/flowchart.html">Mermaid Documentation</a> for more examples.</p>
+<h2 id="graph"><a href="#graph" class="header-anchor">Graph</a></h2><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```mermaid
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#e6db74"></span>graph TD;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    A--&gt;B;
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>    A--&gt;C;
@@ -78,8 +78,7 @@
     A--&gt;C;
     B--&gt;D;
     C--&gt;D;
-</pre><h2 id="state">State</h2>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#e6db74">```mermaid
+</pre><h2 id="state"><a href="#state" class="header-anchor">State</a></h2><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#e6db74">```mermaid
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#e6db74"></span>---
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>title: Simple sample
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>---
@@ -103,8 +102,7 @@ stateDiagram-v2
     Moving --&gt; Still
     Moving --&gt; Crash
     Crash --&gt; [*]
-</pre><h2 id="flowchart">FlowChart</h2>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#e6db74">```mermaid
+</pre><h2 id="flowchart"><a href="#flowchart" class="header-anchor">FlowChart</a></h2><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#e6db74">```mermaid
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#e6db74"></span>flowchart LR
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>  subgraph TOP
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>    direction TB
@@ -136,8 +134,7 @@ stateDiagram-v2
   A --&gt; TOP --&gt; B
   B1 --&gt; B2
 
-</pre><h2 id="entity-relationship">Entity Relationship</h2>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#e6db74">```mermaid
+</pre><h2 id="entity-relationship"><a href="#entity-relationship" class="header-anchor">Entity Relationship</a></h2><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#e6db74">```mermaid
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#e6db74"></span>---
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>title: Order example
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>---
@@ -155,8 +152,7 @@ erDiagram
     ORDER ||--|{ LINE-ITEM : contains
     CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
 
-</pre><h2 id="sequence">Sequence</h2>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```mermaid
+</pre><h2 id="sequence"><a href="#sequence" class="header-anchor">Sequence</a></h2><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```mermaid
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#e6db74"></span>sequenceDiagram
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    participant A as Alice
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>    participant J as John
@@ -168,8 +164,7 @@ erDiagram
     participant J as John
     A-&gt;&gt;J: Hello John, how are you?
     J-&gt;&gt;A: Great!
-</pre><h3 id="class">Class</h3>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#e6db74">```mermaid
+</pre><h3 id="class"><a href="#class" class="header-anchor">Class</a></h3><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#e6db74">```mermaid
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#e6db74"></span>---
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>title: Animal example
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>---
@@ -224,17 +219,11 @@ classDiagram
         +run()
     }
 </pre><script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad: true});</script>
-
-                <bb-navbtns theme="simple" class="nav-wide-wrapper" theme="simple" next=" /bbook/wasm.html"
-                    prev="/bbook/syntax_highlighting.html"></bb-navbtns>
-
-            </main>
+                </main>
+            </main-container>
+            <bb-navbtn class=".navbtn" theme="simple" nav-type="next" href="/bbook/wasm.html"></bb-navbtn>
         </div>
     </div>
-
-    <footer class="mt-auto">
-    </footer>
-
 </body>
 
 </html>

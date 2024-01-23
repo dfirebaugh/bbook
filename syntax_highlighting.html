@@ -32,16 +32,21 @@
             console.log(sideNav.style.display)
             if (sideNav.style.display !== "block") {
                 sideNav.style.display = "block"
+                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr"
             } else if (sideNav.style.display === "block") {
+                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr"
                 sideNav.style.display = "none"
             }
         }
     </script>
-    <bb-navmenu id="sidenav" theme="simple"
-        class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
-        <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
-            <h4 id="getting-started">Getting Started</h4>
-<ul>
+
+
+    <div class="container">
+        <div id="content-container" class="flex flex-row flex-wrap py-4">
+            <bb-navmenu id="sidenav" theme="simple"
+            class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+                <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
+                    <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
 <li><a href="/bbook/intro.html">Intro</a></li>
 <li><a href="/bbook/getting_started.html">Getting Started</a></li>
 <li><a href="/bbook/syntax_highlighting.html">Syntax Highlighting</a></li>
@@ -50,25 +55,20 @@
 <li><a href="/bbook/deploy.html">Deploy</a></li>
 <li><a href="/bbook/themes.html">Themes</a></li>
 </ul>
-<h4 id="planning">Planning</h4>
-<ul>
+<h4 id="planning"><a href="#planning" class="header-anchor">Planning</a></h4><ul>
 <li><a href="/bbook/todos.html">ToDos</a></li>
 </ul>
 
-        </ol>
-    </bb-navmenu>
-
-    <div class="container ">
-        <div id="content-container" class="flex flex-row flex-wrap py-4">
-            <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
-                <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
-
-                <h1 id="syntax-highlighting">Syntax Highlighting</h1>
-<script>
+                </ol>
+            </bb-navmenu>
+            <bb-navbtn class=".navbtn" theme="simple" nav-type="prev" href="/bbook/getting_started.html"></bb-navbtn>
+            <main-container>
+                <main role="main" class="prose md-content">
+                    <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
+                    <h1 id="syntax-highlighting"><a href="#syntax-highlighting" class="header-anchor">Syntax Highlighting</a></h1><script>
 console.log("hello, world!")
 </script>
-<h3 id="c">C</h3>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```c
+<h3 id="c"><a href="#c" class="header-anchor">C</a></h3><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```c
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#e6db74"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">hello_world</span>() {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    printf(<span style="color:#e6db74">&#34;hello, world!&#34;</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>}
@@ -76,8 +76,7 @@ console.log("hello, world!")
 </span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">hell_world</span>() {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    printf(<span style="color:#e6db74">&#34;hello, world!&#34;</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>}
-</span></span></code></pre><h3 id="go">Go</h3>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```go
+</span></span></code></pre><h3 id="go"><a href="#go" class="header-anchor">Go</a></h3><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```go
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#e6db74"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">helloWorld</span>() {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    println(<span style="color:#e6db74">&#34;hello, World!&#34;</span>)
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>}
@@ -85,8 +84,7 @@ console.log("hello, world!")
 </span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">helloWorld</span>() {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    println(<span style="color:#e6db74">&#34;hello, World!&#34;</span>)
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>}
-</span></span></code></pre><h2 id="javascript">javascript</h2>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```javascript
+</span></span></code></pre><h2 id="javascript"><a href="#javascript" class="header-anchor">javascript</a></h2><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```javascript
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#e6db74"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">helloWorld</span>() {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;hello, world!&#34;</span>)
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>}
@@ -94,25 +92,18 @@ console.log("hello, world!")
 </span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">helloWorld</span>() {
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;hello, world!&#34;</span>);
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>}
-</span></span></code></pre><h3 id="python">python</h3>
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```python
+</span></span></code></pre><h3 id="python"><a href="#python" class="header-anchor">python</a></h3><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#e6db74">```python
 </span></span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#e6db74"></span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_world</span>:
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    print(<span style="color:#e6db74">&#34;hello, world!&#34;</span>)
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span><span style="color:#e6db74">```</span>
 </span></span></code></pre><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hell_world</span>:
 </span></span><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    print(<span style="color:#e6db74">&#34;hello, world!&#34;</span>)
 </span></span></code></pre>
-
-                <bb-navbtns theme="simple" class="nav-wide-wrapper" theme="simple" next=" /bbook/diagrams.html"
-                    prev="/bbook/getting_started.html"></bb-navbtns>
-
-            </main>
+                </main>
+            </main-container>
+            <bb-navbtn class=".navbtn" theme="simple" nav-type="next" href="/bbook/diagrams.html"></bb-navbtn>
         </div>
     </div>
-
-    <footer class="mt-auto">
-    </footer>
-
 </body>
 
 </html>

@@ -32,16 +32,21 @@
             console.log(sideNav.style.display)
             if (sideNav.style.display !== "block") {
                 sideNav.style.display = "block"
+                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr"
             } else if (sideNav.style.display === "block") {
+                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr"
                 sideNav.style.display = "none"
             }
         }
     </script>
-    <bb-navmenu id="sidenav" theme="simple"
-        class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
-        <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
-            <h4 id="getting-started">Getting Started</h4>
-<ul>
+
+
+    <div class="container">
+        <div id="content-container" class="flex flex-row flex-wrap py-4">
+            <bb-navmenu id="sidenav" theme="simple"
+            class="simple fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+                <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
+                    <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
 <li><a href="/bbook/intro.html">Intro</a></li>
 <li><a href="/bbook/getting_started.html">Getting Started</a></li>
 <li><a href="/bbook/syntax_highlighting.html">Syntax Highlighting</a></li>
@@ -50,34 +55,23 @@
 <li><a href="/bbook/deploy.html">Deploy</a></li>
 <li><a href="/bbook/themes.html">Themes</a></li>
 </ul>
-<h4 id="planning">Planning</h4>
-<ul>
+<h4 id="planning"><a href="#planning" class="header-anchor">Planning</a></h4><ul>
 <li><a href="/bbook/todos.html">ToDos</a></li>
 </ul>
 
-        </ol>
-    </bb-navmenu>
+                </ol>
+            </bb-navmenu>
+            <bb-navbtn class=".navbtn" theme="simple" nav-type="prev" href="/bbook/todos.html"></bb-navbtn>
+            <main-container>
+                <main role="main" class="prose md-content">
+                    <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
+                    <h1 id="intro"><a href="#intro" class="header-anchor">Intro</a></h1><h2 id="banana-book-"><a href="#banana-book-" class="header-anchor">Banana Book 🍌🍌</a></h2><p><em>bbook</em> is a simple and 🔥blazingly-fast static site generator intended to make it easy to build a website for documentation (similar to gitbook).</p>
 
-    <div class="container ">
-        <div id="content-container" class="flex flex-row flex-wrap py-4">
-            <main role="main" class="prose lg:prose-xl w-full sm:w-2/3 md:w-3/4 pt-1 px-2">
-                <bb-topbar theme="simple" url="/bbook" title="banana book"></bb-topbar>
-
-                <h1 id="intro">Intro</h1>
-<h2 id="banana-book-">Banana Book 🍌🍌</h2>
-<p><em>bbook</em> is a simple and 🔥blazingly-fast static site generator intended to make it easy to build a website for documentation (similar to gitbook).</p>
-
-
-                <bb-navbtns theme="simple" class="nav-wide-wrapper" theme="simple" next=" /bbook/getting_started.html"
-                    prev="/bbook/todos.html"></bb-navbtns>
-
-            </main>
+                </main>
+            </main-container>
+            <bb-navbtn class=".navbtn" theme="simple" nav-type="next" href="/bbook/getting_started.html"></bb-navbtn>
         </div>
     </div>
-
-    <footer class="mt-auto">
-    </footer>
-
 </body>
 
 </html>
