@@ -5,6 +5,7 @@ Here is a simple bash script that can deploy to gh-pages.
 
 ## Download
 
+`./scripts/download_bbook.sh`
 ```bash
 #!/bin/bash
 
@@ -21,6 +22,7 @@ fi
 
 ## Build
 
+`./scripts/build_docs.sh`
 ```bash
 #!/bin/bash
 
@@ -36,10 +38,11 @@ cd ../../
 
 ## Deploy
 
+`./scripts/deploy_docs.sh`
 ```bash
 #!/bin/bash
 
-bbook build
+source ./scripts/build_docs.sh
 
 GIT_REPO_URL=$(git config --get remote.origin.url)
 
