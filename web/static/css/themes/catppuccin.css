@@ -511,3 +511,9 @@
 .catppuccin-simple #sidenav {
     background-color: rgba(var(--ctp-pink), .05);
 }
+
+@media (max-width: 960px) {
+    .catppuccin-simple #sidenav {
+        background-color: rgba(var(--ctp-crust), 1);
+    }
+}

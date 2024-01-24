@@ -59,7 +59,6 @@
 
     <div class="container">
         <bb-topbar
-            class="{{.Theme}}"
             url="{{.SiteURL}}"
             title="{{.BookTitle}}"
             hideSideBar="{{.HideSidebar}}"
@@ -70,19 +69,19 @@
         </bb-topbar>
         <div id="content-container" class="flex flex-row flex-wrap py-4">
             {{if not .HideSidebar}}
-            <bb-navmenu id="sidenav" class="{{.Theme}} fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+            <bb-navmenu id="sidenav" class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
                 <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
                     {{.NavLinks}}
                 </ol>
             </bb-navmenu>
             {{end}}
-            <bb-navbtn class=".navbtn {{.Theme}}" nav-type="prev" href="{{.PreviousPage}}"></bb-navbtn>
+            <bb-navbtn class=".navbtn" nav-type="prev" href="{{.PreviousPage}}"></bb-navbtn>
             <main-container>
                 <main role="main" class="prose md-content">
                     {{.Body}}
                 </main>
             </main-container>
-            <bb-navbtn class=".navbtn {{.Theme}}" nav-type="next" href="{{.NextPage}}"></bb-navbtn>
+            <bb-navbtn class=".navbtn" nav-type="next" href="{{.NextPage}}"></bb-navbtn>
         </div>
     </div>
 
