@@ -51,7 +51,6 @@
 
     <div class="container">
         <bb-topbar
-            class="dark"
             url="/bbook"
             title="banana book"
             hideSideBar="false"
@@ -62,7 +61,7 @@
         </bb-topbar>
         <div id="content-container" class="flex flex-row flex-wrap py-4">
             
-            <bb-navmenu id="sidenav" class="dark fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+            <bb-navmenu id="sidenav" class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
                 <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
                     <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
 <li><a href="/bbook/intro.html">Intro</a></li>
@@ -81,7 +80,7 @@
                 </ol>
             </bb-navmenu>
             
-            <bb-navbtn class=".navbtn dark" nav-type="prev" href="/bbook/intro.html"></bb-navbtn>
+            <bb-navbtn class=".navbtn" nav-type="prev" href="/bbook/intro.html"></bb-navbtn>
             <main-container>
                 <main role="main" class="prose md-content">
                     <h1 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h1><h2 id="installation"><a href="#installation" class="header-anchor">Installation</a></h2><h3 id="install-with-go"><a href="#install-with-go" class="header-anchor">install with go</a></h3><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>go install github.com/dfirebaugh/bbook@latest
@@ -112,7 +111,7 @@ It will also create a <code>SUMMARY.md</code> file.  This is a special markdown 
 
                 </main>
             </main-container>
-            <bb-navbtn class=".navbtn dark" nav-type="next" href="/bbook/syntax_highlighting.html"></bb-navbtn>
+            <bb-navbtn class=".navbtn" nav-type="next" href="/bbook/syntax_highlighting.html"></bb-navbtn>
         </div>
     </div>
 

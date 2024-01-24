@@ -51,7 +51,6 @@
 
     <div class="container">
         <bb-topbar
-            class="dark"
             url="/bbook"
             title="banana book"
             hideSideBar="false"
@@ -62,7 +61,7 @@
         </bb-topbar>
         <div id="content-container" class="flex flex-row flex-wrap py-4">
             
-            <bb-navmenu id="sidenav" class="dark fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
+            <bb-navmenu id="sidenav" class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
                 <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
                     <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
 <li><a href="/bbook/intro.html">Intro</a></li>
@@ -81,7 +80,7 @@
                 </ol>
             </bb-navmenu>
             
-            <bb-navbtn class=".navbtn dark" nav-type="prev" href="/bbook/deploy.html"></bb-navbtn>
+            <bb-navbtn class=".navbtn" nav-type="prev" href="/bbook/deploy.html"></bb-navbtn>
             <main-container>
                 <main role="main" class="prose md-content">
                     <h1 id="themes"><a href="#themes" class="header-anchor">Themes</a></h1><table>
@@ -113,7 +112,7 @@
 
                 </main>
             </main-container>
-            <bb-navbtn class=".navbtn dark" nav-type="next" href="/bbook/todos.html"></bb-navbtn>
+            <bb-navbtn class=".navbtn" nav-type="next" href="/bbook/todos.html"></bb-navbtn>
         </div>
     </div>
 
