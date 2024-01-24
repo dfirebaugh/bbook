@@ -3,8 +3,38 @@
 
 Here is a simple bash script that can deploy to gh-pages.
 
+## Download
 
-## Bash
+```bash
+#!/bin/bash
+
+mkdir -p bin
+
+if [ ! -f bin/bbook ]
+then
+    echo "downloading banana-book"
+    curl -sSL https://github.com/dfirebaugh/bbook/releases/download/v0.0.0/bbook-x86_64_unknown-linux.tar.gz | tar -xz --directory=bin
+else
+    echo "bin/bbook already exists"
+fi
+```
+
+## Build
+
+```bash
+#!/bin/bash
+
+source ./scripts/download_bbook.sh
+
+mkdir -p .dist/web/
+
+cd docs/user_docs
+../../bin/bbook build
+cp -r .book/* ../../.dist/web/
+cd ../../
+```
+
+## Deploy
 
 ```bash
 #!/bin/bash
