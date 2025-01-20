@@ -22,26 +22,71 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"strings"
-
-	"github.com/sirupsen/logrus"
+	"time"
 
 	"github.com/dfirebaugh/bbook/pkg/parser"
 	"github.com/fsnotify/fsnotify"
+	"github.com/gorilla/websocket"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
 var serveCmd = &cobra.Command{
 	Use:   "serve",
-	Short: "serve the .book dir in a local web server",
-	Long:  ``,
+	Short: "Serve the .book directory with a local web server",
+	Long:  "Starts a local web server to serve the .book directory and watches for changes in the ./src directory to rebuild and reload automatically.",
 	Run: func(cmd *cobra.Command, args []string) {
 		serveSite()
 	},
+}
+
+var upgrader = websocket.Upgrader{
+	CheckOrigin: func(r *http.Request) bool {
+		return true
+	},
+}
+
+var (
+	clients   = make(map[*websocket.Conn]bool)
+	broadcast = make(chan struct{})
+)
+
+func handleConnections(w http.ResponseWriter, r *http.Request) {
+	ws, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		// logrus.Error(err)
+		return
+	}
+	defer ws.Close()
+
+	clients[ws] = true
+
+	for {
+		_, _, err := ws.ReadMessage()
+		if err != nil {
+			// logrus.Errorf("error: %v", err)
+			delete(clients, ws)
+			break
+		}
+	}
+}
+
+func handleMessages() {
+	for {
+		<-broadcast
+		for client := range clients {
+			err := client.WriteMessage(websocket.TextMessage, []byte("reload"))
+			if err != nil {
+				logrus.Errorf("error: %v", err)
+				client.Close()
+				delete(clients, client)
+			}
+		}
+	}
 }
 
 func init() {
@@ -56,21 +101,25 @@ func serveSite() {
 
 	http.Handle(siteURL, http.StripPrefix(siteURL, http.FileServer(http.Dir(".book"))))
 
-	http.HandleFunc("/reload", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "<html><body><script>reloadPage();</script></body></html>")
-	})
+	http.HandleFunc("/ws", handleConnections)
+
+	go handleMessages()
 
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error creating watcher: %v", err)
 	}
 	defer watcher.Close()
+
 	err = watcher.Add("./src")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error adding watch on ./src: %v", err)
 	}
 
-	logrus.Println("serving on http://localhost:5555" + conf.Output["html"].SiteURL)
+	logrus.Println("Serving on http://localhost:5555" + conf.Output["html"].SiteURL)
+
+	var debounceTimer *time.Timer
+	debounceDuration := 500 * time.Millisecond
 
 	go func() {
 		for {
@@ -79,19 +128,25 @@ func serveSite() {
 				if !ok {
 					return
 				}
-				// if event.Op&fsnotify.Write == fsnotify.Write || event.Op&fsnotify.Create == fsnotify.Create {
-				if event.Has(fsnotify.Write) || event.Has(fsnotify.Create) {
-					log.Println("Reloading site due to file change:", event.Name)
+				if event.Op&(fsnotify.Write|fsnotify.Create|fsnotify.Remove) != 0 {
+					// log.Printf("File change detected: %s. Scheduling rebuild...", event.Name)
+					if debounceTimer != nil {
+						debounceTimer.Stop()
+					}
+					debounceTimer = time.AfterFunc(debounceDuration, func() {
+						buildSite()
 
-					buildSite()
-
-					http.Get("http://localhost:5555/reload")
+						select {
+						case broadcast <- struct{}{}:
+						default: // Avoid blocking if reload is already in progress
+						}
+					})
 				}
 			case err, ok := <-watcher.Errors:
 				if !ok {
 					return
 				}
-				log.Println("Error watching filesystem:", err)
+				log.Printf("Error watching filesystem: %v", err)
 			}
 		}
 	}()
@@ -102,21 +157,21 @@ func serveSite() {
 func readSummary() []parser.PageLink {
 	file, err := os.Open("./src/SUMMARY.md")
 	if err != nil {
-		panic(err)
+		log.Fatalf("Error opening SUMMARY.md: %v", err)
 	}
 	defer file.Close()
 
 	links, err := parser.ParseLinks(file, ".")
 	if err != nil {
-		panic(err)
+		log.Fatalf("Error parsing SUMMARY.md: %v", err)
 	}
 
 	return links
 }
 
 func ensureTrailingSlash(url string) string {
-	if url == "/" && !strings.HasSuffix(url, "/") {
-		return url
+	if !strings.HasSuffix(url, "/") {
+		return url + "/"
 	}
-	return url + "/"
+	return url
 }

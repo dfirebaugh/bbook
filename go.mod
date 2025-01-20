@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/alecthomas/chroma/v2 v2.2.0
+	github.com/gorilla/websocket v1.5.3
 	github.com/litao91/goldmark-mathjax v0.0.0-20210217064022-a43cf739a50f
 	github.com/pelletier/go-toml v1.9.5
 	github.com/sirupsen/logrus v1.9.0

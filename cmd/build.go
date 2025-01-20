@@ -24,13 +24,13 @@ package cmd
 import (
 	"bytes"
 	"fmt"
+	"html/template"
 	"io"
-	"io/ioutil"
+	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"sync"
-
-	"path/filepath"
 
 	"github.com/dfirebaugh/bbook/templates"
 	"github.com/dfirebaugh/bbook/web"
@@ -41,9 +41,6 @@ import (
 	"github.com/dfirebaugh/bbook/pkg/config"
 	"github.com/dfirebaugh/bbook/pkg/md"
 	"github.com/dfirebaugh/bbook/pkg/parser"
-
-	"html/template"
-	"log"
 
 	"github.com/spf13/cobra"
 )
@@ -75,34 +72,58 @@ func generateMDFiles() {
 	}
 }
 
-func buildSite() {
-	logrus.Println("building files to the `.book` dir")
-	generateMDFiles()
+func generateMDFilesIfNeeded() {
+	for _, link := range readSummary() {
+		filePath := filepath.Join(conf.Book.Src, link.FilePath)
+		if _, err := os.Stat(filePath); os.IsNotExist(err) {
+			writeFile(filePath, []byte(fmt.Sprintf("\n# %s\n", link.Header)))
+		}
+	}
+}
 
-	os.RemoveAll(".book")
-	os.Mkdir(".book", 0777)
-	src := parser.ParseDir(conf.Book.Src)
-
-	// Copy additional JS and CSS files
+func copyAdditionalAssets() {
 	for _, file := range conf.Output["html"].AdditionalJS {
-		err := copyFile(filepath.Join(conf.Book.Src, "..", file), filepath.Join(".book", file))
-		if err != nil {
+		srcPath := filepath.Join(conf.Book.Src, "..", file)
+		dstPath := filepath.Join(".book", file)
+		if err := copyFile(srcPath, dstPath); err != nil {
 			logrus.Errorf("Error copying JS file %s: %v", file, err)
 		}
 	}
 	for _, file := range conf.Output["html"].AdditionalCSS {
-		err := copyFile(filepath.Join(conf.Book.Src, "..", file), filepath.Join(".book", file))
-		if err != nil {
+		srcPath := filepath.Join(conf.Book.Src, "..", file)
+		dstPath := filepath.Join(".book", file)
+		if err := copyFile(srcPath, dstPath); err != nil {
 			logrus.Errorf("Error copying CSS file %s: %v", file, err)
 		}
 	}
+}
+
+func buildSite() {
+	logrus.Println("Building files to the `.book` directory...")
+
+	generateMDFilesIfNeeded()
+
+	if err := os.RemoveAll(".book"); err != nil {
+		logrus.Errorf("Failed to clean up .book directory: %v", err)
+		return
+	}
+	if err := os.Mkdir(".book", 0o777); err != nil {
+		logrus.Errorf("Failed to create .book directory: %v", err)
+		return
+	}
+
+	src := parser.ParseDir(conf.Book.Src)
+
+	copyAdditionalAssets()
 
 	if err := web.CopyStaticFiles(web.StaticFiles, "static", ".book/"); err != nil {
-		logrus.Error(err)
+		logrus.Errorf("Failed to copy static files: %v", err)
+		return
 	}
+
 	generatePages(src)
 
-	logrus.Println("done.")
+	logrus.Println("Build complete.")
 }
 
 func generatePages(pages []parser.Page) {
@@ -153,10 +174,9 @@ func generatePages(pages []parser.Page) {
 	wg.Wait()
 
 	// copy the first link to index.html
-	f, err := ioutil.ReadFile(
+	f, err := os.ReadFile(
 		filepath.Join(".book", filepath.Base(mdLinkToHTMLLink(filepath.Join(conf.Book.Src, links[0].URL)))),
 	)
-
 	if err != nil {
 		logrus.Error(err)
 	}
@@ -180,7 +200,7 @@ func buildPage(page parser.Page, tmpl *template.Template, nextPage string, previ
 	}
 	defer f.Close()
 
-	contentBytes, err := ioutil.ReadFile(filepath.Join(conf.Book.Src, page.URL))
+	contentBytes, err := os.ReadFile(filepath.Join(conf.Book.Src, page.URL))
 	if err != nil {
 		logrus.Error(err)
 	}
@@ -234,20 +254,28 @@ func buildPage(page parser.Page, tmpl *template.Template, nextPage string, previ
 
 // writeFile will write file if the file doesn't exist
 func writeFile(filePath string, content []byte) {
-	err := os.MkdirAll(filepath.Dir(filePath), 0755)
+	err := os.MkdirAll(filepath.Dir(filePath), 0o755)
 	if err != nil {
-		logrus.Error(err)
+		logrus.Errorf("Failed to create directories for %s: %v", filePath, err)
 		return
 	}
 
-	f, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE, 0644)
+	if existing, err := os.ReadFile(filePath); err == nil {
+		if bytes.Equal(existing, content) {
+			return
+		}
+	}
+
+	f, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o644)
 	if err != nil {
-		logrus.Error(err)
+		logrus.Errorf("Failed to open file %s: %v", filePath, err)
 		return
 	}
 	defer f.Close()
 
-	f.Write(content)
+	if _, err := f.Write(content); err != nil {
+		logrus.Errorf("Failed to write to file %s: %v", filePath, err)
+	}
 }
 
 func copyFile(src, dst string) error {
@@ -304,7 +332,7 @@ func readNavLinks() []byte {
 		panic(err)
 	}
 	defer summaryFile.Close()
-	b, err := ioutil.ReadAll(summaryFile)
+	b, err := io.ReadAll(summaryFile)
 	if err != nil {
 		logrus.Error(err)
 	}
@@ -316,7 +344,7 @@ func buildNavLinks() []byte {
 }
 
 func mdLinkToHTMLLink(l string) string {
-	result := strings.Replace(l, ".md", ".html", -1)
+	result := strings.ReplaceAll(l, ".md", ".html")
 	result = strings.TrimPrefix(result, ".")
 	return result
 }

@@ -1,93 +1,121 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{{.SiteURL}}/css/themes/catppuccin.css" rel="stylesheet" />
+        <link href="{{.SiteURL}}/css/themes/dark-blue.css" rel="stylesheet" />
+        <link href="{{.SiteURL}}/css/themes/simple.css" rel="stylesheet" />
+        <link href="{{.SiteURL}}/css/themes/navy.css" rel="stylesheet" />
+        <link href="{{.SiteURL}}/css/themes/dark.css" rel="stylesheet" />
 
-    <link href="{{.SiteURL}}/css/themes/catppuccin.css" rel="stylesheet">
-    <link href="{{.SiteURL}}/css/themes/dark-blue.css" rel="stylesheet">
-    <link href="{{.SiteURL}}/css/themes/simple.css" rel="stylesheet">
-    <link href="{{.SiteURL}}/css/themes/navy.css" rel="stylesheet">
-    <link href="{{.SiteURL}}/css/themes/dark.css" rel="stylesheet">
+        <link href="{{.SiteURL}}/css/core/prose.css" rel="stylesheet" />
+        <link href="{{.SiteURL}}/css/core/main.css" rel="stylesheet" />
+        <link href="{{.SiteURL}}/css/theme.css" rel="stylesheet" />
+        <link
+            rel="shortcut icon"
+            type="image/png"
+            href="{{.SiteURL}}/favicon.png"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
 
-    <link href="{{.SiteURL}}/css/core/prose.css" rel="stylesheet">
-    <link href="{{.SiteURL}}/css/core/main.css" rel="stylesheet">
-    <link href="{{.SiteURL}}/css/theme.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="{{.SiteURL}}/favicon.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {{range .AdditionalCSS}}
+        <link href="{{$.SiteURL}}/{{.}}" rel="stylesheet" />
+        {{end}}
+        <title>{{.Title}}</title>
 
-    {{range .AdditionalCSS}}
-        <link href="{{$.SiteURL}}/{{.}}" rel="stylesheet">
-    {{end}}
-    <title>{{.Title}}</title>
-
-    {{if .HideSidebar}}
-    <style>
-        #content-container {
-            grid-template-columns: 1fr 14fr 1fr !important;
-        }
-    </style>
-    {{end}}
-</head>
-
-<body class="{{.Theme}}">
-    <script type="module" src="{{.SiteURL}}/js/index.js"></script>
+        {{if .HideSidebar}}
+        <style>
+            #content-container {
+                grid-template-columns: 1fr 14fr 1fr !important;
+            }
+        </style>
+        {{end}}
+        <script>
+            const ws = new WebSocket("ws://localhost:5555/ws");
+            ws.onmessage = function (event) {
+                if (event.data === "reload") {
+                    location.reload();
+                }
+            };
+        </script>
+    </head>
     <script>
         function reloadPage() {
             location.reload();
         }
 
         function hamburgerClick() {
-            const sideNav = document.getElementById("sidenav")
-            const contentContainer = document.getElementById("content-container")
-            console.log(sideNav.style.display)
+            const sideNav = document.getElementById("sidenav");
+            const contentContainer =
+                document.getElementById("content-container");
+            console.log(sideNav.style.display);
             if (sideNav.style.display !== "block") {
-                sideNav.style.display = "block"
-                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr"
+                sideNav.style.display = "block";
+                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr";
             } else if (sideNav.style.display === "block") {
-                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr"
-                sideNav.style.display = "none"
+                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr";
+                sideNav.style.display = "none";
             }
         }
     </script>
+    <body class="{{.Theme}}">
+        <script type="module" src="{{.SiteURL}}/js/index.js"></script>
 
-
-    <div class="container">
-        <bb-topbar
-            url="{{.SiteURL}}"
-            title="{{.BookTitle}}"
-            hideSideBar="{{.HideSidebar}}"
-            repoIcon="{{.GithubRepoIcon}}"
-            repoURL="{{.GithubRepoURL}}"
-            editPageURL="{{printf .EditURLTemplate .SiteURL .CurrentPage}}"
+        <div class="container">
+            <bb-topbar
+                url="{{.SiteURL}}"
+                title="{{.BookTitle}}"
+                hideSideBar="{{.HideSidebar}}"
+                repoIcon="{{.GithubRepoIcon}}"
+                repoURL="{{.GithubRepoURL}}"
+                editPageURL="{{printf .EditURLTemplate .SiteURL .CurrentPage}}"
             >
-        </bb-topbar>
-        <div id="content-container" class="flex flex-row flex-wrap py-4">
-            {{if not .HideSidebar}}
-            <bb-navmenu id="sidenav" class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
-                <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
-                    {{.NavLinks}}
-                </ol>
-            </bb-navmenu>
-            {{end}}
-            <bb-navbtn class=".navbtn" nav-type="prev" href="{{.PreviousPage}}"></bb-navbtn>
-            <main-container>
-                <main role="main" class="prose md-content">
-                    {{.Body}}
-                </main>
-            </main-container>
-            <bb-navbtn class=".navbtn" nav-type="next" href="{{.NextPage}}"></bb-navbtn>
+            </bb-topbar>
+            <div id="content-container" class="flex flex-row flex-wrap py-4">
+                {{if not .HideSidebar}}
+                <bb-navmenu
+                    id="sidenav"
+                    class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden"
+                >
+                    <ol
+                        class="navbar prose lg:prose-sm flex flex-col overflow-hidden"
+                        slot="nav-content"
+                    >
+                        {{.NavLinks}}
+                    </ol>
+                </bb-navmenu>
+                {{end}}
+                <bb-navbtn
+                    class=".navbtn"
+                    nav-type="prev"
+                    href="{{.PreviousPage}}"
+                ></bb-navbtn>
+                <main-container>
+                    <main role="main" class="prose md-content">{{.Body}}</main>
+                </main-container>
+                <bb-navbtn
+                    class=".navbtn"
+                    nav-type="next"
+                    href="{{.NextPage}}"
+                ></bb-navbtn>
+            </div>
         </div>
-    </div>
 
-    {{range .AdditionalJS}}
-    <script src="{{$.SiteURL}}/{{.}}"></script>
-    {{end}}
-</body>
-
+        {{range .AdditionalJS}}
+        <script src="{{$.SiteURL}}/{{.}}"></script>
+        {{end}}
+    </body>
 </html>
