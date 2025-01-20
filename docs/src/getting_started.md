@@ -50,5 +50,5 @@ bbook serve
 
 `bbook serve` will serve the `.book` dir by default.  It will also create any markdown files that are linked in the `SUMMARY.md` file (if they don't exist).
 
-> Any file changes will be automatically be rebuilt (however, auto page reload isn't working yet).
+> Any file changes will be automatically be rebuilt.
 
