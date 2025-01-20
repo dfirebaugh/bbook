@@ -136,6 +136,10 @@ main-container {
     padding-top: 2rem;
 }
 
+#main-content {
+  width: 80%;
+}
+
 @media (max-width: 960px) {
     #sidenav {
         width: 100%;
@@ -215,3 +219,4 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background: rgba(var(--ctp-overlay3), .1)
 }
+
