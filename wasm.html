@@ -1,69 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/bbook/css/themes/catppuccin.css" rel="stylesheet" />
+        <link href="/bbook/css/themes/dark-blue.css" rel="stylesheet" />
+        <link href="/bbook/css/themes/simple.css" rel="stylesheet" />
+        <link href="/bbook/css/themes/navy.css" rel="stylesheet" />
+        <link href="/bbook/css/themes/dark.css" rel="stylesheet" />
 
-    <link href="/bbook/css/themes/catppuccin.css" rel="stylesheet">
-    <link href="/bbook/css/themes/dark-blue.css" rel="stylesheet">
-    <link href="/bbook/css/themes/simple.css" rel="stylesheet">
-    <link href="/bbook/css/themes/navy.css" rel="stylesheet">
-    <link href="/bbook/css/themes/dark.css" rel="stylesheet">
+        <link href="/bbook/css/core/prose.css" rel="stylesheet" />
+        <link href="/bbook/css/core/main.css" rel="stylesheet" />
+        <link href="/bbook/css/theme.css" rel="stylesheet" />
+        <link
+            rel="shortcut icon"
+            type="image/png"
+            href="/bbook/favicon.png"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
 
-    <link href="/bbook/css/core/prose.css" rel="stylesheet">
-    <link href="/bbook/css/core/main.css" rel="stylesheet">
-    <link href="/bbook/css/theme.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="/bbook/favicon.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+        <title>WASM Embedding</title>
 
-    
-    <title>WASM Embedding</title>
-
-    
-</head>
-
-<body class="dark">
-    <script type="module" src="/bbook/js/index.js"></script>
+        
+        <script>
+            const ws = new WebSocket("ws://localhost:5555/ws");
+            ws.onmessage = function (event) {
+                if (event.data === "reload") {
+                    location.reload();
+                }
+            };
+        </script>
+    </head>
     <script>
         function reloadPage() {
             location.reload();
         }
 
         function hamburgerClick() {
-            const sideNav = document.getElementById("sidenav")
-            const contentContainer = document.getElementById("content-container")
-            console.log(sideNav.style.display)
+            const sideNav = document.getElementById("sidenav");
+            const contentContainer =
+                document.getElementById("content-container");
+            console.log(sideNav.style.display);
             if (sideNav.style.display !== "block") {
-                sideNav.style.display = "block"
-                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr"
+                sideNav.style.display = "block";
+                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr";
             } else if (sideNav.style.display === "block") {
-                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr"
-                sideNav.style.display = "none"
+                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr";
+                sideNav.style.display = "none";
             }
         }
     </script>
+    <body class="dark">
+        <script type="module" src="/bbook/js/index.js"></script>
 
-
-    <div class="container">
-        <bb-topbar
-            url="/bbook"
-            title="banana book"
-            hideSideBar="false"
-            repoIcon="fa-github"
-            repoURL="https://github.com/dfirebaugh/bbook"
-            editPageURL="%25!%28EXTRA%20string=/bbook,%20string=./wasm.md%29"
+        <div class="container">
+            <bb-topbar
+                url="/bbook"
+                title="banana book"
+                hideSideBar="false"
+                repoIcon="fa-github"
+                repoURL="https://github.com/dfirebaugh/bbook"
+                editPageURL="%25!%28EXTRA%20string=/bbook,%20string=./wasm.md%29"
             >
-        </bb-topbar>
-        <div id="content-container" class="flex flex-row flex-wrap py-4">
-            
-            <bb-navmenu id="sidenav" class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden">
-                <ol class="navbar prose lg:prose-sm flex flex-col overflow-hidden" slot="nav-content">
-                    <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
+            </bb-topbar>
+            <div id="content-container" class="flex flex-row flex-wrap py-4">
+                
+                <bb-navmenu
+                    id="sidenav"
+                    class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden"
+                >
+                    <ol
+                        class="navbar prose lg:prose-sm flex flex-col overflow-hidden"
+                        slot="nav-content"
+                    >
+                        <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
 <li><a href="/bbook/intro.html">Intro</a></li>
 <li><a href="/bbook/getting_started.html">Getting Started</a></li>
 <li><a href="/bbook/syntax_highlighting.html">Syntax Highlighting</a></li>
@@ -77,13 +100,16 @@
 <li><a href="/bbook/todos.html">ToDos</a></li>
 </ul>
 
-                </ol>
-            </bb-navmenu>
-            
-            <bb-navbtn class=".navbtn" nav-type="prev" href="/bbook/diagrams.html"></bb-navbtn>
-            <main-container>
-                <main role="main" class="prose md-content">
-                    <h1 id="wasm-embedding"><a href="#wasm-embedding" class="header-anchor">WASM Embedding</a></h1><blockquote>
+                    </ol>
+                </bb-navmenu>
+                
+                <bb-navbtn
+                    class=".navbtn"
+                    nav-type="prev"
+                    href="/bbook/diagrams.html"
+                ></bb-navbtn>
+                <main-container>
+                    <main role="main" class="prose md-content"><h1 id="wasm-embedding"><a href="#wasm-embedding" class="header-anchor">WASM Embedding</a></h1><blockquote>
 <p>note: currently only golang wasm files are supported.  However, if you are compiling to wasm from another language, you may be able to get this to work if you provide the necessary glue code</p>
 </blockquote>
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;<span style="color:#f92672">go-wasm-canvas</span> 
@@ -94,14 +120,16 @@
 <go-wasm-canvas src="wasm_example/spectrum.wasm" height="400" width="530">
 </go-wasm-canvas>
 </center>
-
-                </main>
-            </main-container>
-            <bb-navbtn class=".navbtn" nav-type="next" href="/bbook/extending.html"></bb-navbtn>
+</main>
+                </main-container>
+                <bb-navbtn
+                    class=".navbtn"
+                    nav-type="next"
+                    href="/bbook/extending.html"
+                ></bb-navbtn>
+            </div>
         </div>
-    </div>
 
-    
-</body>
-
+        
+    </body>
 </html>
