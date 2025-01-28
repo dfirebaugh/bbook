@@ -5,7 +5,7 @@ src = "src"
 title = "banana book"
 
 [output.html]
-default-theme = "dark"
+default-theme = "simple"
 site-url = "/bbook"
 github-repo-icon = "fa-github"
 github-repo-url = "https://github.com/dfirebaugh/bbook"

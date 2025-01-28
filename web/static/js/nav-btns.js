@@ -20,6 +20,8 @@ template.innerHTML = `
       display: flex;
       justify-content: center;
       align-items: center;
+      /*right: 0;*/
+      /*left: 0;*/
     }
 
     a {
@@ -80,6 +82,8 @@ class NavBtns extends HTMLElement {
       if (prevLink) prevLink.href = href || "#";
     } else if (navType === "next") {
       prevLink?.remove();
+      const container = this.shadowRoot.querySelector(".nav-wide-wrapper");
+      container.style.right = "0";
       if (nextLink) nextLink.href = href || "#";
     } else {
       if (prevLink) prevLink.href = "#";
