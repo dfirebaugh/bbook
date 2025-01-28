@@ -51,14 +51,13 @@
 
         function hamburgerClick() {
             const sideNav = document.getElementById("sidenav");
-            const contentContainer =
-                document.getElementById("content-container");
-            console.log(sideNav.style.display);
+            const contentContainer = document.getElementById("body-container");
+            
             if (sideNav.style.display !== "block") {
                 sideNav.style.display = "block";
-                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr";
+                contentContainer.style.gridTemplateColumns = "auto 1fr";
             } else if (sideNav.style.display === "block") {
-                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr";
+                contentContainer.style.gridTemplateColumns = "auto";
                 sideNav.style.display = "none";
             }
         }
@@ -66,32 +65,21 @@
     <body class="dark">
         <script type="module" src="/bbook/js/index.js"></script>
 
-        <div class="container">
-            <bb-topbar
-                url="/bbook"
-                title="banana book"
-                hideSideBar="false"
-                repoIcon="fa-github"
-                repoURL="https://github.com/dfirebaugh/bbook"
-                editPageURL="%25!%28EXTRA%20string=/bbook,%20string=./themes.md%29"
+        <div id="body-container" class="container">
+            
+            <bb-navmenu
+                id="sidenav"
+                class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden"
             >
-            </bb-topbar>
-            <div id="content-container" class="flex flex-row flex-wrap py-4">
-                
-                <bb-navmenu
-                    id="sidenav"
-                    class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden"
+                <ol
+                    class="navbar prose lg:prose-sm flex flex-col overflow-hidden"
+                    slot="nav-content"
                 >
-                    <ol
-                        class="navbar prose lg:prose-sm flex flex-col overflow-hidden"
-                        slot="nav-content"
-                    >
-                        <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
+                    <h4 id="getting-started"><a href="#getting-started" class="header-anchor">Getting Started</a></h4><ul>
 <li><a href="/bbook/intro.html">Intro</a></li>
 <li><a href="/bbook/getting_started.html">Getting Started</a></li>
 <li><a href="/bbook/syntax_highlighting.html">Syntax Highlighting</a></li>
 <li><a href="/bbook/diagrams.html">Diagrams</a></li>
-<li><a href="/bbook/wasm.html">WASM Embedding</a></li>
 <li><a href="/bbook/extending.html">Extending</a></li>
 <li><a href="/bbook/deploy.html">Deploy</a></li>
 <li><a href="/bbook/themes.html">Themes</a></li>
@@ -100,16 +88,35 @@
 <li><a href="/bbook/todos.html">ToDos</a></li>
 </ul>
 
-                    </ol>
-                </bb-navmenu>
-                
-                <bb-navbtn
-                    class=".navbtn"
-                    nav-type="prev"
-                    href="/bbook/deploy.html"
-                ></bb-navbtn>
-                <main-container>
-                    <main id="main-content" role="main" class="prose md-content"><h1 id="themes"><a href="#themes" class="header-anchor">Themes</a></h1><table>
+                </ol>
+            </bb-navmenu>
+            
+            <div id="main-content">
+                <bb-topbar
+                    url="/bbook"
+                    title="banana book"
+                    hideSideBar="false"
+                    repoIcon="fa-github"
+                    repoURL="https://github.com/dfirebaugh/bbook"
+                    editPageURL="%25!%28EXTRA%20string=/bbook,%20string=./themes.md%29"
+                >
+                </bb-topbar>
+                <div
+                    id="content-container"
+                    class="flex flex-row flex-wrap py-4"
+                >
+                    <bb-navbtn
+                        class="navbtn"
+                        nav-type="prev"
+                        href="/bbook/deploy.html"
+                    ></bb-navbtn>
+                    <main-container>
+                        <main
+                            id="main-content"
+                            role="main"
+                            class="prose md-content"
+                        >
+                            <h1 id="themes"><a href="#themes" class="header-anchor">Themes</a></h1><table>
 <thead>
 <tr>
 <th>name</th>
@@ -135,13 +142,15 @@
 </tr>
 </tbody>
 </table>
-</main>
-                </main-container>
-                <bb-navbtn
-                    class=".navbtn"
-                    nav-type="next"
-                    href="/bbook/todos.html"
-                ></bb-navbtn>
+
+                        </main>
+                    </main-container>
+                    <bb-navbtn
+                        class="navbtn"
+                        nav-type="next"
+                        href="/bbook/todos.html"
+                    ></bb-navbtn>
+                </div>
             </div>
         </div>
 
