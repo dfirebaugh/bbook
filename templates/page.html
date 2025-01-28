@@ -59,14 +59,13 @@
 
         function hamburgerClick() {
             const sideNav = document.getElementById("sidenav");
-            const contentContainer =
-                document.getElementById("content-container");
-            console.log(sideNav.style.display);
+            const contentContainer = document.getElementById("body-container");
+            //console.log(sideNav.style.display);
             if (sideNav.style.display !== "block") {
                 sideNav.style.display = "block";
-                contentContainer.style.gridTemplateColumns = "1fr 1fr 14fr 1fr";
+                contentContainer.style.gridTemplateColumns = "auto 1fr";
             } else if (sideNav.style.display === "block") {
-                contentContainer.style.gridTemplateColumns = "1fr 14fr 1fr";
+                contentContainer.style.gridTemplateColumns = "auto";
                 sideNav.style.display = "none";
             }
         }
@@ -74,43 +73,54 @@
     <body class="{{.Theme}}">
         <script type="module" src="{{.SiteURL}}/js/index.js"></script>
 
-        <div class="container">
-            <bb-topbar
-                url="{{.SiteURL}}"
-                title="{{.BookTitle}}"
-                hideSideBar="{{.HideSidebar}}"
-                repoIcon="{{.GithubRepoIcon}}"
-                repoURL="{{.GithubRepoURL}}"
-                editPageURL="{{printf .EditURLTemplate .SiteURL .CurrentPage}}"
+        <div id="body-container" class="container">
+            {{if not .HideSidebar}}
+            <bb-navmenu
+                id="sidenav"
+                class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden"
             >
-            </bb-topbar>
-            <div id="content-container" class="flex flex-row flex-wrap py-4">
-                {{if not .HideSidebar}}
-                <bb-navmenu
-                    id="sidenav"
-                    class="fixed top-0 left-0 h-full w-64 bg-white shadow-md hidden"
+                <ol
+                    class="navbar prose lg:prose-sm flex flex-col overflow-hidden"
+                    slot="nav-content"
                 >
-                    <ol
-                        class="navbar prose lg:prose-sm flex flex-col overflow-hidden"
-                        slot="nav-content"
-                    >
-                        {{.NavLinks}}
-                    </ol>
-                </bb-navmenu>
-                {{end}}
-                <bb-navbtn
-                    class=".navbtn"
-                    nav-type="prev"
-                    href="{{.PreviousPage}}"
-                ></bb-navbtn>
-                <main-container>
-                    <main id="main-content" role="main" class="prose md-content">{{.Body}}</main>
-                </main-container>
-                <bb-navbtn
-                    class=".navbtn"
-                    nav-type="next"
-                    href="{{.NextPage}}"
-                ></bb-navbtn>
+                    {{.NavLinks}}
+                </ol>
+            </bb-navmenu>
+            {{end}}
+            <div id="main-content">
+                <bb-topbar
+                    url="{{.SiteURL}}"
+                    title="{{.BookTitle}}"
+                    hideSideBar="{{.HideSidebar}}"
+                    repoIcon="{{.GithubRepoIcon}}"
+                    repoURL="{{.GithubRepoURL}}"
+                    editPageURL="{{printf .EditURLTemplate .SiteURL .CurrentPage}}"
+                >
+                </bb-topbar>
+                <div
+                    id="content-container"
+                    class="flex flex-row flex-wrap py-4"
+                >
+                    <bb-navbtn
+                        class="navbtn"
+                        nav-type="prev"
+                        href="{{.PreviousPage}}"
+                    ></bb-navbtn>
+                    <main-container>
+                        <main
+                            id="main-content"
+                            role="main"
+                            class="prose md-content"
+                        >
+                            {{.Body}}
+                        </main>
+                    </main-container>
+                    <bb-navbtn
+                        class="navbtn"
+                        nav-type="next"
+                        href="{{.NextPage}}"
+                    ></bb-navbtn>
+                </div>
             </div>
         </div>
 
